@@ -55,206 +55,206 @@ export function HomePage() {
       <Header variant="home" />
 
       <div className="max-w-lg mx-auto md:max-w-6xl w-full">
-      {/* 1. Hero Banner: Big Saving Days */}
-      <div className="animate-section px-3 mt-4">
-        <div className="bg-[#122e5a] rounded-2xl p-4 sm:p-6 text-white relative overflow-hidden flex shadow-sm min-h-[160px]">
-          <div className="z-10 w-[55%] flex flex-col justify-center">
-            <span className="bg-[#fcd34d] text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-2 uppercase tracking-wide">Best Deals</span>
-            <h2 className="text-[26px] sm:text-3xl font-extrabold leading-tight mb-2 tracking-tight">
-              Big Saving<br />Days
-            </h2>
-            <p className="text-white/80 text-[11px] sm:text-sm mb-4 leading-tight">
-              Grab Best Deals<br />On Top Brands
-            </p>
-            <button className="bg-white text-gray-900 text-[11px] font-bold py-2 px-3 rounded-md self-start flex items-center gap-1 hover:bg-gray-100 shadow-sm transition-transform active:scale-95">
-              Shop Now <span className="text-sm font-black leading-none">→</span>
-            </button>
-          </div>
-          <div className="absolute right-0 top-0 bottom-0 w-[55%] bg-gradient-to-l from-white/10 to-transparent"></div>
-          {/* Dummy image representation with devices */}
-          <div className="w-[45%] flex items-center justify-end z-10 relative pr-2">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <div className="absolute w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
-              <div className="w-[70px] h-[90px] bg-[#3b82f6] border-2 border-gray-800 rounded-xl relative z-10 shadow-lg translate-x-2 -translate-y-1">
-                 <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
-                 <div className="absolute top-5 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
-              </div>
-              <div className="w-[45px] h-[55px] bg-gray-900 rounded-lg absolute bottom-2 right-12 z-20 shadow-lg border border-gray-700 flex flex-col items-center justify-center">
-                 <div className="text-[8px] text-white">10:09</div>
-                 <div className="w-4 h-4 rounded bg-[#ef4444] mt-1 grid grid-cols-2 gap-0.5 p-0.5">
-                   <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
-                   <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
-                 </div>
-              </div>
+        {/* 1. Hero Banner: Big Saving Days */}
+        <div className="animate-section px-3 mt-4 md:px-4 md:mt-20">
+          <div className="bg-[#122e5a] rounded-2xl p-4 sm:p-6 text-white relative overflow-hidden flex shadow-sm min-h-[160px]">
+            <div className="z-10 w-[55%] flex flex-col justify-center">
+              <span className="bg-[#fcd34d] text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-2 uppercase tracking-wide">Best Deals</span>
+              <h2 className="text-[26px] sm:text-3xl font-extrabold leading-tight mb-2 tracking-tight">
+                Big Saving<br />Days
+              </h2>
+              <p className="text-white/80 text-[11px] sm:text-sm mb-4 leading-tight">
+                Grab Best Deals<br />On Top Brands
+              </p>
+              <button className="bg-white text-gray-900 text-[11px] font-bold py-2 px-3 rounded-md self-start flex items-center gap-1 hover:bg-gray-100 shadow-sm transition-transform active:scale-95">
+                Shop Now <span className="text-sm font-black leading-none">→</span>
+              </button>
             </div>
-          </div>
-          {/* Carousel dots */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
-             <div className="w-2 h-2 rounded-full bg-white"></div>
-             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Categories Ribbon */}
-      <div className="animate-section mt-6 mb-4">
-        <div className="flex justify-between items-center px-4 mb-3">
-          <h3 className="text-[16px] md:text-xl font-extrabold text-gray-900 tracking-tight">Shop by Category</h3>
-          <Link to="/category/all" className="text-blue-600 hover:text-blue-700 text-[12px] md:text-sm font-bold flex items-center gap-1 transition-colors">See All <span className="text-[14px] font-black leading-none">→</span></Link>
-        </div>
-        <div className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar px-4 pb-3 snap-x">
-          {categories.map((cat, idx) => {
-            const bgColors = ['bg-[#fff1e6]', 'bg-[#eef2ff]', 'bg-[#ecfdf5]', 'bg-[#eff6ff]', 'bg-[#fffbeb]', 'bg-[#fdf2f8]'];
-            const bg = bgColors[idx % bgColors.length];
-            return (
-              <Link key={cat.id || idx} to={`/category/${cat.id}`} className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group snap-start w-16 md:w-20">
-                <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${bg} flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden p-2.5`}>
-                  {cat.image_url ? (
-                    <img src={cat.image_url} alt={cat.name} className="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" />
-                  ) : (
-                    <Sparkles className="w-6 h-6 text-gray-400" />
-                  )}
+            <div className="absolute right-0 top-0 bottom-0 w-[55%] bg-gradient-to-l from-white/10 to-transparent"></div>
+            {/* Dummy image representation with devices */}
+            <div className="w-[45%] flex items-center justify-end z-10 relative pr-2">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+                <div className="w-[70px] h-[90px] bg-[#3b82f6] border-2 border-gray-800 rounded-xl relative z-10 shadow-lg translate-x-2 -translate-y-1">
+                  <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
+                  <div className="absolute top-5 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
                 </div>
-                <span className="text-[11px] md:text-[12px] font-semibold text-gray-800 text-center leading-tight line-clamp-2">{cat.name}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* 3. Info Cards Grid */}
-      <div className="animate-section px-3 mt-6">
-        <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x pb-2">
-          {/* SuperCoin */}
-          <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
-            <div className="relative z-10 pr-8">
-              <div className="flex items-center gap-1.5 mb-2.5">
-                <div className="w-4 h-4 bg-[#ffc107] rounded-full flex items-center justify-center shrink-0">
-                  <Zap className="w-3 h-3 text-white fill-white" strokeWidth={3} />
-                </div>
-                <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">SuperCoin</span>
-              </div>
-              <p className="text-[13px] text-gray-600 font-semibold mb-2">Earned <span className="text-[#16a34a] font-extrabold">120</span></p>
-            </div>
-            <p className="text-[13px] text-[#2563eb] font-semibold cursor-pointer relative z-10">Use Now</p>
-            
-            <div className="absolute right-3 bottom-3 w-[42px] h-[42px] bg-gradient-to-br from-[#ffcd38] to-[#ffb300] rounded-full shadow-sm flex items-center justify-center transform group-hover:scale-105 transition-transform overflow-hidden z-0">
-               <Zap className="w-5 h-5 text-white fill-white transform -rotate-12" strokeWidth={2} />
-               <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-white/60 rounded-full blur-[1px]"></div>
-            </div>
-          </div>
-
-          {/* No Cost EMI */}
-          <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
-            <div className="relative z-10 pr-8">
-              <div className="flex items-center gap-1.5 mb-2.5">
-                <Calendar className="w-4 h-4 text-[#16a34a] shrink-0" strokeWidth={2.5} />
-                <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">No Cost EMI</span>
-              </div>
-              <p className="text-[13px] text-gray-600 font-semibold mb-2 leading-tight">Up to 12 Months</p>
-            </div>
-            <p className="text-[13px] text-[#2563eb] font-semibold cursor-pointer relative z-10">Explore Now</p>
-            
-            <div className="absolute right-3 bottom-3 w-[42px] h-[42px] bg-[#16a34a] rounded-[12px] flex items-center justify-center transform group-hover:scale-105 transition-transform shadow-sm z-0">
-               <Calendar className="w-6 h-6 text-white" strokeWidth={2.5} />
-            </div>
-          </div>
-
-          {/* Exchange Offer */}
-          <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
-            <div className="relative z-10 pr-10">
-              <div className="flex items-center gap-1.5 mb-2.5">
-                <RefreshCw className="w-4 h-4 text-[#f97316] shrink-0" strokeWidth={2.5} />
-                <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">Exchange Offer</span>
-              </div>
-              <p className="text-[13px] text-gray-600 font-semibold mb-0.5 leading-tight">Up to ₹15,000 Off</p>
-              <p className="text-[13px] text-gray-900 font-semibold leading-tight">On Old Devices</p>
-            </div>
-            
-            <div className="absolute right-3 bottom-3 w-[42px] h-[42px] flex items-center justify-center transform group-hover:scale-105 transition-transform z-0">
-               <RefreshCw className="w-8 h-8 text-[#f97316]" strokeWidth={3} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 4. Deal of the Day */}
-      <div className="animate-section px-3 mt-6 mb-6">
-        <div className="bg-white border border-gray-100 rounded-xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] py-3 px-1">
-          <div className="flex items-center justify-between mb-3 px-2">
-            <div className="flex items-center gap-3">
-              <h3 className="text-[15px] font-extrabold text-gray-900 tracking-tight">Deal of the Day</h3>
-              <div className="flex items-center bg-[#ffebeb] text-[#ef4444] font-black text-[11px] px-1.5 py-0.5 rounded shadow-sm tracking-widest border border-red-100">
-                12 <span className="text-red-300 px-0.5 animate-pulse">:</span> 45 <span className="text-red-300 px-0.5 animate-pulse">:</span> 30
-              </div>
-            </div>
-            <Link to="/offers" className="text-blue-600 text-[12px] font-bold px-2 py-1 rounded hover:bg-blue-50 transition-colors">View All</Link>
-          </div>
-
-          <div className="flex gap-3 overflow-x-auto hide-scrollbar px-2 pb-2 snap-x">
-            {products.length > 0 ? products.slice(0, 5).map((p, idx) => {
-              const discounts = [40, 18, 50, 25, 30];
-              const off = discounts[idx] || 20;
-              const originalPrice = p.price * (1 + (off / 100));
-              return (
-                <div key={p.id} className="w-[140px] shrink-0 snap-start border border-gray-100 rounded-lg p-2 hover:shadow-md transition-shadow relative bg-white flex flex-col group cursor-pointer" onClick={() => navigate(`/product/${p.id}`)}>
-                  <div className="absolute top-2 left-2 bg-green-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-sm z-10">
-                    {off}% OFF
+                <div className="w-[45px] h-[55px] bg-gray-900 rounded-lg absolute bottom-2 right-12 z-20 shadow-lg border border-gray-700 flex flex-col items-center justify-center">
+                  <div className="text-[8px] text-white">10:09</div>
+                  <div className="w-4 h-4 rounded bg-[#ef4444] mt-1 grid grid-cols-2 gap-0.5 p-0.5">
+                    <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
+                    <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
                   </div>
-                  <div className="h-[130px] bg-white rounded-md mb-2 p-2 flex items-center justify-center relative overflow-hidden group-hover:bg-gray-50 transition-colors">
-                    {p.image_url ? (
-                      <img src={p.image_url} alt={p.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
+                </div>
+              </div>
+            </div>
+            {/* Carousel dots */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+              <div className="w-2 h-2 rounded-full bg-white"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Categories Ribbon */}
+        <div className="animate-section mt-6 mb-4">
+          <div className="flex justify-between items-center px-4 mb-3">
+            <h3 className="text-[16px] md:text-xl font-extrabold text-gray-900 tracking-tight">Shop by Category</h3>
+            <Link to="/category/all" className="text-blue-600 hover:text-blue-700 text-[12px] md:text-sm font-bold flex items-center gap-1 transition-colors">See All <span className="text-[14px] font-black leading-none">→</span></Link>
+          </div>
+          <div className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar px-4 pb-3 snap-x">
+            {categories.map((cat, idx) => {
+              const bgColors = ['bg-[#fff1e6]', 'bg-[#eef2ff]', 'bg-[#ecfdf5]', 'bg-[#eff6ff]', 'bg-[#fffbeb]', 'bg-[#fdf2f8]'];
+              const bg = bgColors[idx % bgColors.length];
+              return (
+                <Link key={cat.id || idx} to={`/category/${cat.id}`} className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group snap-start w-16 md:w-20">
+                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${bg} flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden p-2.5`}>
+                    {cat.image_url ? (
+                      <img src={cat.image_url} alt={cat.name} className="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" />
                     ) : (
-                       <div className="w-16 h-16 bg-gray-100 rounded-full"></div>
+                      <Sparkles className="w-6 h-6 text-gray-400" />
                     )}
                   </div>
-                  <h4 className="text-[12px] font-semibold text-gray-800 line-clamp-1 mb-1">{p.name}</h4>
-                  <div className="flex items-center gap-1.5 mb-1.5">
-                    <span className="text-[13px] font-extrabold text-gray-900">₹{p.price}</span>
-                    <span className="text-[10px] text-gray-400 font-medium line-through">₹{Math.round(originalPrice)}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-[9px] font-bold text-blue-600 border border-blue-100 bg-blue-50 w-fit px-1 py-0.5 rounded-sm">
-                    <ShieldCheck className="w-3 h-3 fill-blue-600 text-white" /> Assured
-                  </div>
-                </div>
+                  <span className="text-[11px] md:text-[12px] font-semibold text-gray-800 text-center leading-tight line-clamp-2">{cat.name}</span>
+                </Link>
               );
-            }) : (
-              <div className="w-full text-center py-8 text-gray-500 text-sm">Loading deals...</div>
-            )}
+            })}
           </div>
         </div>
-      </div>
 
-      {/* 5. Sponsored Banner */}
-      <div className="animate-section px-3 mb-10">
-        <div className="bg-gradient-to-r from-[#0d9488] to-[#14b8a6] rounded-xl p-4 text-white relative overflow-hidden flex items-center shadow-[0_4px_15px_rgba(20,184,166,0.3)]">
-           <div className="absolute top-1 left-2 text-white/60 text-[9px] uppercase font-bold tracking-widest">Sponsored</div>
-           <div className="z-10 w-[60%] pt-3">
-             <h3 className="text-[15px] sm:text-lg font-extrabold leading-tight mb-2 tracking-tight">Extra 10% Off<br/>On ICICI Bank Cards</h3>
-             <button className="text-white text-[11px] font-bold flex items-center gap-1 hover:underline">
-               Shop Now <span className="font-black">→</span>
-             </button>
-           </div>
-           <div className="w-[40%] flex justify-end z-10 relative">
-              <div className="w-24 h-14 bg-gradient-to-br from-[#f97316] to-[#dc2626] rounded-lg shadow-xl flex flex-col justify-center px-2 transform -rotate-6 border border-white/20">
-                 <div className="flex items-center gap-1 mb-0.5">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-sm"></div>
-                    <span className="text-[8px] font-extrabold italic tracking-wider">ICICI Bank</span>
-                 </div>
-                 <div className="flex gap-1 opacity-50">
-                   <div className="w-3 h-1 bg-white rounded-full"></div>
-                   <div className="w-3 h-1 bg-white rounded-full"></div>
-                   <div className="w-3 h-1 bg-white rounded-full"></div>
-                 </div>
+        {/* 3. Info Cards Grid */}
+        <div className="animate-section px-3 mt-6">
+          <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x pb-2">
+            {/* SuperCoin */}
+            <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
+              <div className="relative z-10 pr-8">
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <div className="w-4 h-4 bg-[#ffc107] rounded-full flex items-center justify-center shrink-0">
+                    <Zap className="w-3 h-3 text-white fill-white" strokeWidth={3} />
+                  </div>
+                  <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">SuperCoin</span>
+                </div>
+                <p className="text-[13px] text-gray-600 font-semibold mb-2">Earned <span className="text-[#16a34a] font-extrabold">120</span></p>
               </div>
-           </div>
-        </div>
-      </div>
+              <p className="text-[13px] text-[#2563eb] font-semibold cursor-pointer relative z-10">Use Now</p>
 
-      <div className="animate-section px-3 mb-12 flex flex-col gap-8 md:gap-10">
+              <div className="absolute right-3 bottom-3 w-[42px] h-[42px] bg-gradient-to-br from-[#ffcd38] to-[#ffb300] rounded-full shadow-sm flex items-center justify-center transform group-hover:scale-105 transition-transform overflow-hidden z-0">
+                <Zap className="w-5 h-5 text-white fill-white transform -rotate-12" strokeWidth={2} />
+                <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-white/60 rounded-full blur-[1px]"></div>
+              </div>
+            </div>
+
+            {/* No Cost EMI */}
+            <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
+              <div className="relative z-10 pr-8">
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <Calendar className="w-4 h-4 text-[#16a34a] shrink-0" strokeWidth={2.5} />
+                  <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">No Cost EMI</span>
+                </div>
+                <p className="text-[13px] text-gray-600 font-semibold mb-2 leading-tight">Up to 12 Months</p>
+              </div>
+              <p className="text-[13px] text-[#2563eb] font-semibold cursor-pointer relative z-10">Explore Now</p>
+
+              <div className="absolute right-3 bottom-3 w-[42px] h-[42px] bg-[#16a34a] rounded-[12px] flex items-center justify-center transform group-hover:scale-105 transition-transform shadow-sm z-0">
+                <Calendar className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+            </div>
+
+            {/* Exchange Offer */}
+            <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
+              <div className="relative z-10 pr-10">
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <RefreshCw className="w-4 h-4 text-[#f97316] shrink-0" strokeWidth={2.5} />
+                  <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">Exchange Offer</span>
+                </div>
+                <p className="text-[13px] text-gray-600 font-semibold mb-0.5 leading-tight">Up to ₹15,000 Off</p>
+                <p className="text-[13px] text-gray-900 font-semibold leading-tight">On Old Devices</p>
+              </div>
+
+              <div className="absolute right-3 bottom-3 w-[42px] h-[42px] flex items-center justify-center transform group-hover:scale-105 transition-transform z-0">
+                <RefreshCw className="w-8 h-8 text-[#f97316]" strokeWidth={3} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. Deal of the Day */}
+        <div className="animate-section px-3 mt-6 mb-6">
+          <div className="bg-white border border-gray-100 rounded-xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] py-3 px-1">
+            <div className="flex items-center justify-between mb-3 px-2">
+              <div className="flex items-center gap-3">
+                <h3 className="text-[15px] font-extrabold text-gray-900 tracking-tight">Deal of the Day</h3>
+                <div className="flex items-center bg-[#ffebeb] text-[#ef4444] font-black text-[11px] px-1.5 py-0.5 rounded shadow-sm tracking-widest border border-red-100">
+                  12 <span className="text-red-300 px-0.5 animate-pulse">:</span> 45 <span className="text-red-300 px-0.5 animate-pulse">:</span> 30
+                </div>
+              </div>
+              <Link to="/offers" className="text-blue-600 text-[12px] font-bold px-2 py-1 rounded hover:bg-blue-50 transition-colors">View All</Link>
+            </div>
+
+            <div className="flex gap-3 overflow-x-auto hide-scrollbar px-2 pb-2 snap-x">
+              {products.length > 0 ? products.slice(0, 5).map((p, idx) => {
+                const discounts = [40, 18, 50, 25, 30];
+                const off = discounts[idx] || 20;
+                const originalPrice = p.price * (1 + (off / 100));
+                return (
+                  <div key={p.id} className="w-[140px] shrink-0 snap-start border border-gray-100 rounded-lg p-2 hover:shadow-md transition-shadow relative bg-white flex flex-col group cursor-pointer" onClick={() => navigate(`/product/${p.id}`)}>
+                    <div className="absolute top-2 left-2 bg-green-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-sm z-10">
+                      {off}% OFF
+                    </div>
+                    <div className="h-[130px] bg-white rounded-md mb-2 p-2 flex items-center justify-center relative overflow-hidden group-hover:bg-gray-50 transition-colors">
+                      {p.image_url ? (
+                        <img src={p.image_url} alt={p.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
+                      ) : (
+                        <div className="w-16 h-16 bg-gray-100 rounded-full"></div>
+                      )}
+                    </div>
+                    <h4 className="text-[12px] font-semibold text-gray-800 line-clamp-1 mb-1">{p.name}</h4>
+                    <div className="flex items-center gap-1.5 mb-1.5">
+                      <span className="text-[13px] font-extrabold text-gray-900">₹{p.price}</span>
+                      <span className="text-[10px] text-gray-400 font-medium line-through">₹{Math.round(originalPrice)}</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-[9px] font-bold text-blue-600 border border-blue-100 bg-blue-50 w-fit px-1 py-0.5 rounded-sm">
+                      <ShieldCheck className="w-3 h-3 fill-blue-600 text-white" /> Assured
+                    </div>
+                  </div>
+                );
+              }) : (
+                <div className="w-full text-center py-8 text-gray-500 text-sm">Loading deals...</div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 5. Sponsored Banner */}
+        <div className="animate-section px-3 mb-10">
+          <div className="bg-gradient-to-r from-[#0d9488] to-[#14b8a6] rounded-xl p-4 text-white relative overflow-hidden flex items-center shadow-[0_4px_15px_rgba(20,184,166,0.3)]">
+            <div className="absolute top-1 left-2 text-white/60 text-[9px] uppercase font-bold tracking-widest">Sponsored</div>
+            <div className="z-10 w-[60%] pt-3">
+              <h3 className="text-[15px] sm:text-lg font-extrabold leading-tight mb-2 tracking-tight">Extra 10% Off<br />On ICICI Bank Cards</h3>
+              <button className="text-white text-[11px] font-bold flex items-center gap-1 hover:underline">
+                Shop Now <span className="font-black">→</span>
+              </button>
+            </div>
+            <div className="w-[40%] flex justify-end z-10 relative">
+              <div className="w-24 h-14 bg-gradient-to-br from-[#f97316] to-[#dc2626] rounded-lg shadow-xl flex flex-col justify-center px-2 transform -rotate-6 border border-white/20">
+                <div className="flex items-center gap-1 mb-0.5">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-sm"></div>
+                  <span className="text-[8px] font-extrabold italic tracking-wider">ICICI Bank</span>
+                </div>
+                <div className="flex gap-1 opacity-50">
+                  <div className="w-3 h-1 bg-white rounded-full"></div>
+                  <div className="w-3 h-1 bg-white rounded-full"></div>
+                  <div className="w-3 h-1 bg-white rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="animate-section px-3 mb-12 flex flex-col gap-8 md:gap-10">
           {/* Best Sellers */}
           {products.filter(p => p.is_bestseller).length > 0 && (
             <div>
@@ -465,7 +465,7 @@ export function HomePage() {
               </div>
             </div>
           </div>
-      </div>
+        </div>
 
       </div>
 
