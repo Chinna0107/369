@@ -204,7 +204,7 @@ function DesktopFullHeader({ cartCount, wishlistCount, token, user, handleLogout
                 {searchResults && searchResults.length > 0 && (
                   <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] max-h-[300px] overflow-y-auto">
                     {searchResults.map((product) => (
-                      <div 
+                      <div
                         key={product.id}
                         onClick={() => {
                           setLocalSearch('');
@@ -271,7 +271,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [localSearch, setLocalSearch] = useState('');
-  
+
   useEffect(() => {
     setLocalSearch(searchParams.get('search') || '');
   }, [searchParams]);
@@ -302,7 +302,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
   const [menuOpen, setMenuOpen] = useState(false); // slide-out drawer for home header
   const [mobileOffersOpen, setMobileOffersOpen] = useState(false);
   const [offers, setOffers] = useState([]);
-  
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000/api'}/offers/active`)
       .then(r => r.json())
@@ -314,21 +314,21 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
   const products = useStoreData(s => s.products);
 
   const searchResults = localSearch.length >= 2
-    ? products.filter(p => 
-        p.name.toLowerCase().includes(localSearch.toLowerCase()) || 
-        (p.description && p.description.toLowerCase().includes(localSearch.toLowerCase()))
-      ).slice(0, 5).map(p => {
-        let parsedSizes = [];
-        try {
-          if (typeof p.sizes === 'string') parsedSizes = JSON.parse(p.sizes);
-          else if (Array.isArray(p.sizes)) parsedSizes = p.sizes;
-        } catch (e) {}
-        return {
-          ...p,
-          displayImg: getFirstImage(p, parsedSizes),
-          displayPrice: getProductPrice(p, parsedSizes)
-        };
-      })
+    ? products.filter(p =>
+      p.name.toLowerCase().includes(localSearch.toLowerCase()) ||
+      (p.description && p.description.toLowerCase().includes(localSearch.toLowerCase()))
+    ).slice(0, 5).map(p => {
+      let parsedSizes = [];
+      try {
+        if (typeof p.sizes === 'string') parsedSizes = JSON.parse(p.sizes);
+        else if (Array.isArray(p.sizes)) parsedSizes = p.sizes;
+      } catch (e) { }
+      return {
+        ...p,
+        displayImg: getFirstImage(p, parsedSizes),
+        displayPrice: getProductPrice(p, parsedSizes)
+      };
+    })
     : [];
 
   const cartItems = useCartStore((state) => state.items);
@@ -358,13 +358,13 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
 
   return (
     <>
-      <DesktopFullHeader 
-        cartCount={cartCount} 
-        wishlistCount={wishlistCount} 
-        token={token} 
-        user={user} 
-        handleLogout={handleLogout} 
-        hideSearch={effectiveHideSearch} 
+      <DesktopFullHeader
+        cartCount={cartCount}
+        wishlistCount={wishlistCount}
+        token={token}
+        user={user}
+        handleLogout={handleLogout}
+        hideSearch={effectiveHideSearch}
         localSearch={localSearch}
         handleSearchChange={handleSearchChange}
         handleSearchEnter={handleSearchEnter}
@@ -462,13 +462,18 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                   <stop offset="0%" stopColor="#ff8500" />
                   <stop offset="100%" stopColor="#ffba00" />
                 </linearGradient>
+                <filter id="waveGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#ff8500" floodOpacity="0.4" />
+                </filter>
               </defs>
-              {/* Full white background to match image 2 */}
+              {/* Full white background */}
               <rect width="375" height="170" fill="white" />
-              {/* Cream accent wave behind orange */}
-              <path d="M 0,0 L 0,40 C 120,10 180,135 280,135 C 330,135 350,105 375,100 L 375,0 Z" fill="#ffedd5" opacity="0.6" />
-              {/* Main orange wave covering top and right */}
-              <path d="M 0,0 L 0,30 C 120,0 180,120 280,120 C 330,120 350,90 375,85 L 375,0 Z" fill="url(#headerGrad)" />
+              
+              {/* Back Cream Wave (Single Elegant S-Curve) */}
+              <path d="M 0,-50 L 375,-50 L 375,115 C 225,115 150,30 0,30 Z" fill="#ffedd5" opacity="0.8" />
+              
+              {/* Main Orange Wave (Single Elegant S-Curve) */}
+              <path d="M 0,-50 L 375,-50 L 375,100 C 225,100 150,20 0,20 Z" fill="url(#headerGrad)" filter="url(#waveGlow)" />
             </svg>
           </div>
 
@@ -477,35 +482,36 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
             <div className={`flex items-start justify-between ${hideSearch ? 'mb-0' : 'mb-4'}`}>
               <div className="flex items-center">
                 {title ? (
-                   <div className="flex items-center gap-3">
-                      <button onClick={() => navigate(-1)} className="bg-white/90 p-2 rounded-full shadow-sm backdrop-blur-sm text-gray-900 border border-gray-100">
-                         <ArrowLeft className="w-5 h-5" />
-                      </button>
-                      <h1 className="text-gray-900 font-bold text-[17px] tracking-wide bg-white/80 px-3 py-1 rounded-full backdrop-blur-sm shadow-sm">{title}</h1>
-                   </div>
+                  <div className="flex items-center gap-3">
+                    <button onClick={() => navigate(-1)} className="bg-white/90 p-2 rounded-full shadow-sm backdrop-blur-sm text-gray-900 border border-gray-100">
+                      <ArrowLeft className="w-5 h-5" />
+                    </button>
+                    <h1 className="text-gray-900 font-bold text-[17px] tracking-wide bg-white/80 px-3 py-1 rounded-full backdrop-blur-sm shadow-sm">{title}</h1>
+                  </div>
                 ) : (
-                   <Link to="/" className="-ml-1">
-                     <img src={logo} alt="Logo" className="h-14 w-auto object-contain" />
-                   </Link>
+                  <Link to="/" className="-ml-1">
+                    <img src={logo} alt="Logo" className="h-14 w-auto object-contain" />
+                  </Link>
                 )}
               </div>
+
               <div className="flex items-center gap-5 mt-2 mr-1">
-                <button
-                  onClick={() => navigate('/notifications')}
-                  className="relative text-gray-800 hover:text-gray-900 transition-colors"
-                >
-                  <Bell className="w-6 h-6" strokeWidth={1.5} />
-                </button>
                 <button
                   onClick={() => navigate('/cart')}
                   className="relative text-gray-800 hover:text-gray-900 transition-colors"
                 >
-                  <ShoppingCart className="w-6 h-6" strokeWidth={1.5} />
+                  <ShoppingCart className="w-6 h-6" />
                   {cartCount > 0 && (
                     <span className="absolute -top-1.5 -right-2 w-4.5 h-4.5 bg-blue-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm">
                       {cartCount}
                     </span>
                   )}
+                </button>
+                <button
+                  onClick={() => setMenuOpen(true)}
+                  className="relative text-gray-800 hover:text-gray-900 transition-colors"
+                >
+                  <Menu className="w-7 h-7" />
                 </button>
               </div>
             </div>
@@ -526,7 +532,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                 {searchResults && searchResults.length > 0 && (
                   <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] max-h-[250px] overflow-y-auto">
                     {searchResults.map((product) => (
-                      <div 
+                      <div
                         key={product.id}
                         onClick={() => {
                           setLocalSearch('');
@@ -635,7 +641,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                   if (item.isAccordion && item.id === 'offers') {
                     return (
                       <div key={item.id} className="mb-0.5">
-                        <button 
+                        <button
                           onClick={() => setMobileOffersOpen(!mobileOffersOpen)}
                           className="w-full flex items-center gap-3.5 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors text-left group">
                           <div className={`w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center shrink-0 group-hover:bg-gray-200 transition-colors ${item.color}`}>
