@@ -34,11 +34,11 @@ export function WishlistPage() {
            <div className="bg-white p-5 mb-6 rounded-3xl flex items-center gap-4 shadow-sm border border-gray-100 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-orange-50 to-transparent rounded-bl-full pointer-events-none opacity-50 blur-xl"></div>
               <div className="w-14 h-14 bg-gray-100 border border-gray-200 rounded-full overflow-hidden shrink-0 shadow-inner group-hover:shadow-md transition-all">
-                <img src="https://ui-avatars.com/api/?name=SWABHIVAR+User&background=fe6603&color=fff" alt="Profile" />
+                <img src="https://ui-avatars.com/api/?name=ULMGH369+User&background=fe6603&color=fff" alt="Profile" />
               </div>
               <div className="relative z-10">
                 <div className="text-[12px] text-gray-500">Hello,</div>
-                <div className="font-bold text-[16px] text-[#022A21]">SWABHIVAR User</div>
+                <div className="font-bold text-[16px] text-[#022A21]">ULMGH369 User</div>
               </div>
            </div>
            
@@ -71,7 +71,7 @@ export function WishlistPage() {
                <p className="text-gray-500 text-[15px] mb-8 max-w-sm">
                  You have no items in your wishlist. Start adding your favorite pieces!
                </p>
-               <Link to="/category/all" className="bg-gradient-to-r from-brand-orange to-yellow-500 text-white px-8 py-3.5 rounded-xl font-bold text-[15px] shadow-md hover:shadow-lg hover:-translate-y-1 transition-all">
+               <Link to="/category/all" className="bg-gradient-to-r from-brand-orange to-yellow-500 text-white px-8 py-3.5 rounded-2xl font-bold text-[15px] shadow-[0_4px_20px_rgba(254,102,3,0.3)] hover:shadow-[0_8px_30px_rgba(254,102,3,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all">
                  Explore Products
                </Link>
              </div>
@@ -113,28 +113,28 @@ export function WishlistPage() {
                 const discountPercent = Math.round(((originalPrice - displayPrice) / originalPrice) * 100);
 
                 return (
-                  <div key={product.id} className={`flex gap-6 p-6 ${idx !== wishlistProducts.length - 1 ? 'border-b border-gray-100' : ''} hover:bg-gray-50 transition-all relative group cursor-pointer`} onClick={() => navigate(`/product/${product.id}`)}>
+                  <div key={product.id} className={`flex gap-4 md:gap-6 p-4 md:p-6 ${idx !== wishlistProducts.length - 1 ? 'border-b border-gray-100' : ''} hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 relative group cursor-pointer bg-white rounded-3xl m-2 md:m-3 border border-transparent hover:border-gray-100`} onClick={() => navigate(`/product/${product.id}`)}>
                     
-                    <div className="w-28 h-28 md:w-32 md:h-32 flex-shrink-0 relative bg-gray-50 rounded-2xl p-2 border border-gray-200 shadow-inner overflow-hidden">
-                      <img src={firstImg} alt={product.name} className="w-full h-full object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-500" />
+                    <div className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 relative bg-gray-50 rounded-2xl p-2 border border-gray-200 shadow-inner overflow-hidden">
+                      <img src={firstImg} alt={product.name} onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=No+Image'; }} className="w-full h-full object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     
                     <div className="flex flex-col flex-grow justify-center">
                       <div className="flex justify-between items-start gap-4">
-                        <div className="pr-12">
-                          <h3 className="text-[16px] md:text-lg font-bold text-[#022A21] group-hover:text-brand-orange transition-colors line-clamp-2 leading-snug mb-2 font-serif">{product.name}</h3>
+                        <div className="pr-10 md:pr-12">
+                          <h3 className="text-[15px] md:text-lg font-bold text-gray-900 group-hover:text-brand-orange transition-colors line-clamp-2 leading-snug mb-1.5 font-serif">{product.name}</h3>
                           
-                          <div className="flex items-center gap-2 mb-4">
-                            <div className="flex items-center gap-1 bg-orange-50 border border-brand-orange/20 text-brand-orange px-2 py-0.5 rounded-full text-xs font-bold shadow-sm">
-                              4.5 <Star className="w-3 h-3 fill-current" />
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="flex items-center gap-1 bg-orange-50 border border-brand-orange/20 text-brand-orange px-2 py-0.5 rounded-full text-[10px] font-bold shadow-sm">
+                              4.5 <Star className="w-2.5 h-2.5 fill-current" />
                             </div>
-                            <span className="text-gray-500 font-medium text-[13px]">(1,245 reviews)</span>
+                            <span className="text-gray-500 font-medium text-xs">(1,245 reviews)</span>
                           </div>
 
-                          <div className="flex items-baseline gap-3 mb-2">
-                            <span className="text-2xl font-extrabold text-[#022A21]">₹{displayPrice}</span>
-                            <span className="text-gray-400 line-through text-[14px]">₹{originalPrice}</span>
-                            <span className="text-brand-orange font-bold text-[14px]">{discountPercent}% off</span>
+                          <div className="flex items-baseline gap-2 md:gap-3 mb-2 flex-wrap">
+                            <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">₹{displayPrice}</span>
+                            <span className="text-gray-400 line-through text-xs md:text-[14px] font-medium">₹{originalPrice}</span>
+                            <span className="bg-red-50 text-red-600 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide">{discountPercent}% off</span>
                           </div>
                         </div>
 
@@ -152,7 +152,7 @@ export function WishlistPage() {
                         </button>
                       </div>
 
-                      <div className="mt-2 flex items-center gap-2 md:opacity-0 md:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      <div className="mt-3 flex items-center gap-2 md:opacity-0 md:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                          <button 
                             onClick={(e) => {
                               e.preventDefault();
@@ -160,7 +160,7 @@ export function WishlistPage() {
                               addToCart(product, defaultSize);
                               navigate('/cart');
                             }}
-                            className="bg-gradient-to-r from-brand-orange to-yellow-500 text-white px-6 py-2.5 text-[14px] font-bold rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                            className="w-full md:w-auto bg-gradient-to-r from-brand-orange to-yellow-500 text-white px-6 py-2.5 text-[14px] font-bold rounded-xl md:rounded-2xl flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(254,102,3,0.25)] hover:shadow-[0_8px_25px_rgba(254,102,3,0.4)] hover:-translate-y-0.5 active:scale-[0.98] transition-all"
                          >
                             <ShoppingCart className="w-4 h-4" /> Add to Cart
                          </button>

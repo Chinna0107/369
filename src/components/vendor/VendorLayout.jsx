@@ -57,8 +57,8 @@ export function VendorLayout({ children }) {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-[#fe6603]/10 px-4 py-3 flex items-center justify-between z-50">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Swabhivar Shoppers Vendor" className="h-8 object-contain mix-blend-multiply" />
-          <span className="font-bold text-lg"><span className="text-[#fe6603]">Swabhivar</span> <span className="text-[#036e26]">Shoppers</span></span>
+          <img src={logo} alt="ULMGH369 Vendor" className="h-8 object-contain mix-blend-multiply" />
+          <span className="font-bold text-lg"><span className="text-[#fe6603]">ULMGH369</span> <span className="text-[#036e26]">Shoppers</span></span>
         </div>
         <button onClick={() => setMobileOpen(!mobileOpen)} className="text-[#fe6603]">
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -77,10 +77,10 @@ export function VendorLayout({ children }) {
         <div className="p-6 border-b border-[#fe6603]/10 bg-white/50 backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-[#fe6603]/10 flex items-center justify-center flex-shrink-0">
-              <img src={logo} alt="Swabhivar Shoppers" className="w-8 h-8 object-contain mix-blend-multiply" />
+              <img src={logo} alt="ULMGH369" className="w-8 h-8 object-contain mix-blend-multiply" />
             </div>
             <div>
-              <p className="font-extrabold text-xl tracking-tight leading-tight"><span className="text-[#fe6603]">Swabhivar</span><br/><span className="text-[#036e26]">Shoppers</span></p>
+              <p className="font-extrabold text-xl tracking-tight leading-tight"><span className="text-[#fe6603]">ULMGH369</span><br/><span className="text-[#036e26]">Shoppers</span></p>
               <div className="flex items-center gap-1.5 mt-1.5 bg-[#fe6603]/10 w-fit px-2 py-0.5 rounded-md">
                 <Store className="w-3 h-3 text-[#fe6603]" />
                 <p className="text-[#fe6603] text-[10px] font-sans font-bold uppercase tracking-wider">Vendor Portal</p>

@@ -82,10 +82,11 @@ export function LoginPage() {
 
   const displayError = localError || (step === 'login' && error);
 
-  const inputClass = "w-full border-2 border-gray-100 rounded-2xl px-4 py-3.5 pl-11 text-[15px] text-gray-900 focus:outline-none focus:border-[#022A21] focus:bg-white transition-all bg-gray-50 placeholder-gray-400 font-medium";
+  const inputClass = "w-full border-2 border-gray-100 rounded-2xl px-4 py-3.5 pl-11 text-[15px] text-gray-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/10 focus:bg-white transition-all bg-gray-50 placeholder-gray-400 font-medium shadow-sm hover:border-gray-200";
+  const btnClass = "w-full bg-brand-blue text-white font-bold py-4 rounded-2xl text-[15px] shadow-[0_4px_15px_rgba(59,130,246,0.3)] hover:bg-blue-700 hover:shadow-[0_8px_25px_rgba(59,130,246,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-2";
 
   const stepMeta = {
-    login: { emoji: '👋', title: 'Welcome Back', sub: 'Sign in to your SWABHIVAR account' },
+    login: { emoji: '👋', title: 'Welcome Back', sub: 'Sign in to your ULMGH369 account' },
     forgot_email: { emoji: '🔑', title: 'Reset Password', sub: 'Enter your registered email to get an OTP' },
     forgot_otp: { emoji: '📨', title: 'Verify OTP', sub: `Code sent to ${form.email}` },
     forgot_reset: { emoji: '🔒', title: 'New Password', sub: 'Set a strong new password for your account' },
@@ -93,42 +94,35 @@ export function LoginPage() {
   const meta = stepMeta[step];
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: '#022A21' }}>
-
-      {/* ── GREEN HERO ── */}
-      <div className="relative flex flex-col items-center pt-14 pb-24 px-6 overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* ── HEADER STYLE HERO ── */}
+      <div className="relative flex flex-col items-center pt-14 pb-24 px-6 overflow-hidden bg-white border-b border-gray-100">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full border border-white/[0.05]" />
-          <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full border border-white/[0.07]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-orange/[0.05] rounded-full blur-3xl" />
-          <div className="absolute -bottom-4 -left-12 w-48 h-48 rounded-full border border-brand-orange/[0.07]" />
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="absolute w-1 h-1 rounded-full bg-brand-orange/20"
-              style={{ top: `${10 + i * 13}%`, left: `${8 + i * 14}%` }} />
-          ))}
+          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full border border-gray-100" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-blue/[0.03] rounded-full blur-3xl" />
         </div>
 
         <button onClick={() => step !== 'login' ? (setStep('login'), clearMessages()) : navigate(-1)}
-          className="absolute top-5 left-5 z-10 flex items-center gap-1.5 text-white/60 hover:text-white text-sm font-medium transition-colors bg-white/[0.07] px-3 py-1.5 rounded-full border border-white/10">
+          className="absolute top-5 left-5 z-10 flex items-center gap-1.5 text-gray-500 hover:text-gray-900 text-sm font-bold transition-colors bg-white hover:bg-gray-50 px-4 py-2 rounded-full border border-gray-200 shadow-sm">
           <ArrowLeft className="w-3.5 h-3.5" /> {step !== 'login' ? 'Back' : 'Home'}
         </button>
 
         <div className="relative z-10 flex flex-col items-center">
           <div className="relative mb-4">
-            <div className="w-[90px] h-[90px] rounded-[1.75rem] bg-white/[0.08] border border-white/[0.14] flex items-center justify-center shadow-[0_16px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)]">
-              <img src={logo} alt="SWABHIVAR" className="h-14 w-14 object-contain drop-shadow-2xl" />
+            <div className="w-[90px] h-[90px] rounded-[1.75rem] bg-white border border-gray-100 flex items-center justify-center shadow-lg">
+              <img src={logo} alt="ULMGH369" className="h-14 w-14 object-contain" />
             </div>
-            <div className="absolute -bottom-1.5 -right-1.5 w-7 h-7 bg-gradient-to-br from-brand-orange to-yellow-400 rounded-full border-[3px] border-[#022A21] flex items-center justify-center shadow-lg">
+            <div className="absolute -bottom-1.5 -right-1.5 w-7 h-7 bg-brand-blue rounded-full border-[3px] border-white flex items-center justify-center shadow-md">
               <ShieldCheck className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
             </div>
           </div>
-          <h1 className="text-white text-[22px] font-extrabold tracking-widest" style={{ fontFamily: 'Georgia, serif', letterSpacing: '0.18em' }}>SWABHIVAR</h1>
+          <h1 className="text-gray-900 text-[22px] font-extrabold tracking-widest" style={{ fontFamily: 'Georgia, serif', letterSpacing: '0.18em' }}>ULMGH369</h1>
           <p className="text-brand-orange text-[10px] font-bold tracking-[0.28em] uppercase mt-1">Your Choice, From Anywhere.</p>
           <div className="flex items-center gap-5 mt-5">
             {['10K+ Members', '100% Secure', 'Free Replacements'].map(t => (
               <div key={t} className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-orange/70" />
-                <span className="text-white/50 text-[10px] font-medium">{t}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-blue/70" />
+                <span className="text-gray-500 text-[10px] font-bold">{t}</span>
               </div>
             ))}
           </div>
@@ -178,8 +172,7 @@ export function LoginPage() {
                 <div className="flex justify-end -mt-1">
                   <button type="button" onClick={() => { setStep('forgot_email'); clearMessages(); }} className="text-[13px] font-semibold text-brand-orange hover:underline underline-offset-2">Forgot Password?</button>
                 </div>
-                <button type="submit" disabled={loading}
-                  className="w-full bg-gradient-to-r from-[#022A21] to-[#054335] text-white font-bold py-4 rounded-2xl text-[15px] shadow-[0_4px_20px_rgba(2,42,33,0.3)] hover:shadow-[0_8px_30px_rgba(2,42,33,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-1">
+                <button type="submit" disabled={loading} className={btnClass}>
                   {loading ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Logging in...</> : 'Login Securely →'}
                 </button>
               </form>
@@ -197,7 +190,7 @@ export function LoginPage() {
                 <GoogleIcon />
                 Continue with Google
               </button>
-              <Link to="/signup" className="flex items-center justify-center w-full border-2 border-brand-orange/25 text-brand-orange font-bold py-3.5 rounded-2xl text-[15px] hover:bg-brand-orange/5 hover:border-brand-orange/50 transition-all">
+              <Link to="/signup" className="flex items-center justify-center w-full border-2 border-brand-blue/25 text-brand-blue font-bold py-3.5 rounded-2xl text-[15px] hover:bg-brand-blue/5 hover:border-brand-blue/50 transition-all">
                 Create Account
               </Link>
             </>
@@ -210,8 +203,7 @@ export function LoginPage() {
                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                 <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="Registered email address" className={inputClass} />
               </div>
-              <button type="submit" disabled={loading}
-                className="w-full bg-gradient-to-r from-brand-orange to-yellow-400 text-white font-bold py-4 rounded-2xl text-[15px] shadow-[0_4px_20px_rgba(254,102,3,0.35)] hover:shadow-[0_8px_30px_rgba(254,102,3,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-2">
+              <button type="submit" disabled={loading} className={btnClass}>
                 {loading ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending...</> : 'Send OTP →'}
               </button>
             </form>
@@ -225,8 +217,7 @@ export function LoginPage() {
                 <input name="otp" type="text" value={form.otp} onChange={handleChange} required maxLength={6}
                   placeholder="Enter 6-digit OTP" className={inputClass + ' tracking-[0.5em] text-center text-lg font-bold pl-4'} />
               </div>
-              <button type="submit" disabled={loading}
-                className="w-full bg-gradient-to-r from-brand-orange to-yellow-400 text-white font-bold py-4 rounded-2xl text-[15px] shadow-[0_4px_20px_rgba(254,102,3,0.35)] hover:shadow-[0_8px_30px_rgba(254,102,3,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all disabled:opacity-60 flex items-center justify-center gap-2">
+              <button type="submit" disabled={loading} className={btnClass}>
                 {loading ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Verifying...</> : 'Verify OTP →'}
               </button>
             </form>
@@ -247,8 +238,7 @@ export function LoginPage() {
                   </button>
                 </div>
               ))}
-              <button type="submit" disabled={loading}
-                className="w-full bg-gradient-to-r from-[#022A21] to-[#054335] text-white font-bold py-4 rounded-2xl text-[15px] shadow-[0_4px_20px_rgba(2,42,33,0.3)] hover:shadow-[0_8px_30px_rgba(2,42,33,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-2">
+              <button type="submit" disabled={loading} className={btnClass}>
                 {loading ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Resetting...</> : 'Reset Password →'}
               </button>
             </form>

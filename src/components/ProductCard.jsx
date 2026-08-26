@@ -43,7 +43,7 @@ const CATEGORY_IMAGES = {
   default: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80',
 };
 
-function getCategoryFallback(product) {
+export function getCategoryFallback(product) {
   const text = `${product.name || ''} ${product.category || ''}`.toLowerCase();
   for (const [key, url] of Object.entries(CATEGORY_IMAGES)) {
     if (key !== 'default' && text.includes(key)) return url;
@@ -52,7 +52,7 @@ function getCategoryFallback(product) {
 }
 
 // Safely extract first valid image URL from any field format
-function getFirstImage(product, parsedSizes) {
+export function getFirstImage(product, parsedSizes) {
   // 1. Try hierarchical variant images
   if (parsedSizes?.length > 0 && parsedSizes[0].images?.length > 0) {
     const img = parsedSizes[0].images[0];
@@ -87,6 +87,18 @@ function getFirstImage(product, parsedSizes) {
   return getCategoryFallback(product);
 }
 
+export function getProductPrice(product, parsedSizes) {
+  let defaultSize = { size: 'Standard', price: product.price || 0 };
+  if (parsedSizes?.length > 0) {
+    if (Array.isArray(parsedSizes[0].sizes) && parsedSizes[0].sizes.length > 0) {
+      defaultSize = parsedSizes[0].sizes[0];
+    } else if (parsedSizes[0].size) {
+      defaultSize = parsedSizes[0];
+    }
+  }
+  return defaultSize.price || product.price || 0;
+}
+
 
 export function ProductCard({ product, layout = 'grid' }) {
   const navigate = useNavigate();
@@ -113,7 +125,7 @@ export function ProductCard({ product, layout = 'grid' }) {
   }
 
   const firstImg = getFirstImage(product, parsedSizes);
-  const displayPrice = defaultSize.price || product.price || 0;
+  const displayPrice = getProductPrice(product, parsedSizes);
   // firstImg always returns a valid URL (category fallback if needed)
   // onError swaps to category fallback in case of network issues
   const fallbackImg = getCategoryFallback(product);
@@ -127,7 +139,7 @@ export function ProductCard({ product, layout = 'grid' }) {
     e.preventDefault(); e.stopPropagation();
     const url = window.location.origin + `/product/${product.id}`;
     if (navigator.share) {
-      navigator.share({ title: product.name, text: `Check out ${product.name} on SWABHIVAR!`, url }).catch(console.error);
+      navigator.share({ title: product.name, text: `Check out ${product.name} on ULMGH369!`, url }).catch(console.error);
     } else {
       navigator.clipboard.writeText(url);
     }
@@ -144,11 +156,12 @@ export function ProductCard({ product, layout = 'grid' }) {
   if (layout === 'list') {
     return (
       <Link to={`/product/${product.id}`}
-        className="flex gap-4 p-4 rounded-2xl mb-3 relative hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 border border-gray-100 group bg-white">
-        <div className="w-24 h-24 bg-gray-50 rounded-xl flex-shrink-0 overflow-hidden border border-gray-100">
+        className="flex gap-4 p-4 rounded-2xl mb-3 relative hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 border border-gray-100 group bg-white">
+        <div className="w-24 h-24 bg-gray-50 rounded-xl flex-shrink-0 overflow-hidden border border-gray-100 relative">
           <img src={imgErr ? fallbackImg : firstImg} alt={product.name}
             onError={() => setImgErr(true)}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
         <div className="flex flex-col justify-center flex-grow pr-8">
           <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-snug mb-1 group-hover:text-[#022A21] transition-colors">{product.name}</h3>
@@ -159,12 +172,12 @@ export function ProductCard({ product, layout = 'grid' }) {
           </div>
           <div className="flex items-center justify-between mt-auto">
             <div className="flex items-center gap-2">
-              <span className="text-base font-bold text-brand-orange">₹{displayPrice?.toLocaleString('en-IN')}</span>
+              <span className="text-base font-bold text-gray-900">₹{displayPrice?.toLocaleString('en-IN')}</span>
               <span className="text-xs text-gray-400 line-through">₹{Math.round(displayPrice * 1.4)?.toLocaleString('en-IN')}</span>
             </div>
             <button onClick={handleAddToCart}
-              className="bg-[#022A21] hover:bg-[#054335] transition-colors p-2.5 rounded-xl relative z-20 active:scale-95">
-              <ShoppingCart className="w-4 h-4 text-white" strokeWidth={2} />
+              className="bg-brand-orange hover:bg-orange-600 text-white transition-colors p-2.5 rounded-xl relative z-20 active:scale-95 shadow-sm hover:shadow-md">
+              <ShoppingCart className="w-4 h-4" strokeWidth={2} />
             </button>
           </div>
         </div>
@@ -183,10 +196,10 @@ export function ProductCard({ product, layout = 'grid' }) {
   /* ── GRID LAYOUT ── */
   return (
     <div onClick={handleCardClick}
-      className="group flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] h-full relative bg-white border border-gray-100 pb-3">
+      className="group flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 h-full relative bg-white border border-gray-100 pb-3">
 
       {/* Discount badge */}
-      <div className="absolute top-3 left-3 bg-[#7A1D25] text-white text-[10px] md:text-xs font-bold px-2.5 py-1 rounded-full z-20 shadow-sm tracking-wide">
+      <div className="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] md:text-xs font-extrabold px-3 py-1.5 rounded-full z-20 shadow-md tracking-wider">
         {(Math.round(((displayPrice * 1.4 - displayPrice) / (displayPrice * 1.4)) * 100))}% OFF
       </div>
 
@@ -200,27 +213,28 @@ export function ProductCard({ product, layout = 'grid' }) {
 
       {/* Image */}
       <div className="relative bg-gray-50 w-full aspect-[4/5] overflow-hidden rounded-b-2xl md:rounded-b-3xl">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
         <img
           src={imgErr ? fallbackImg : firstImg}
           alt={product.name}
           onError={() => setImgErr(true)}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         />
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-grow px-3 pt-4 md:px-4">
-        <p className="text-gray-400 text-[10px] md:text-[11px] font-medium tracking-widest uppercase mb-1">
-          {product.brand || product.category || 'KANCHI HERITAGE'}
+      <div className="flex flex-col flex-grow px-3 pt-4 md:px-5">
+        <p className="text-gray-400 text-[10px] md:text-[11px] font-semibold tracking-widest uppercase mb-1.5">
+          {product.brand || product.category || 'ULMGH369'}
         </p>
 
-        <h3 className="text-[15px] md:text-[17px] font-bold text-gray-900 line-clamp-2 leading-snug mb-2 font-serif" style={{ fontFamily: 'Georgia, serif' }}>
+        <h3 className="text-[15px] md:text-[17px] font-bold text-gray-900 line-clamp-2 leading-snug mb-3 group-hover:text-brand-orange transition-colors">
           {product.name}
         </h3>
 
-        <div className="flex items-end gap-2 mb-2">
-          <span className="text-lg md:text-xl font-extrabold text-gray-900">₹{displayPrice?.toLocaleString('en-IN')}</span>
-          <span className="text-xs md:text-sm text-gray-400 line-through mb-0.5">₹{Math.round(displayPrice * 1.4)?.toLocaleString('en-IN')}</span>
+        <div className="flex items-end gap-2.5 mb-3">
+          <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">₹{displayPrice?.toLocaleString('en-IN')}</span>
+          <span className="text-xs md:text-sm text-gray-400 line-through mb-1 font-medium">₹{Math.round(displayPrice * 1.4)?.toLocaleString('en-IN')}</span>
         </div>
 
         <div className="flex items-center gap-2 mb-3">

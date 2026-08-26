@@ -5,4 +5,4 @@ Disallow: /checkout
 Disallow: /cart
 Disallow: /orders
 
-Sitemap: https://swabhivarshoppers.com/sitemap.xml
+Sitemap: https://ulmgh369.com/sitemap.xml

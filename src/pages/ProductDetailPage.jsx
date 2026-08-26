@@ -92,7 +92,7 @@ export function ProductDetailPage() {
     e.preventDefault(); e.stopPropagation();
     const url = window.location.href;
     if (navigator.share) {
-      navigator.share({ title: product.name, text: `Check out ${product.name} on SWABHIVAR!`, url }).catch(console.error);
+      navigator.share({ title: product.name, text: `Check out ${product.name} on ULMGH369!`, url }).catch(console.error);
     } else {
       navigator.clipboard.writeText(url);
     }
@@ -108,6 +108,45 @@ export function ProductDetailPage() {
 
   const deliveryDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' });
 
+  // Prepare all available specs
+  const allSpecs = {
+    ...(product.brand && { Brand: product.brand }),
+    ...(product.sku && { SKU: product.sku }),
+    ...(product.gender && product.gender !== 'Any' && { Gender: product.gender }),
+    ...(product.category && { Category: product.category }),
+    ...(currentVariant?.color && { Color: currentVariant.color }),
+    ...customAttrs
+  };
+
+  const hiddenKeys = ['seo_title', 'seo_keywords', 'meta_description', 'search_tags', 'delivery_cod'];
+
+  const specGroups = [
+    { title: "Basic Information", keys: ['Brand', 'SKU', 'Gender', 'Category', 'Color', 'product_code', 'condition', 'product_type'] },
+    { title: "Physical Attributes", keys: ['weight', 'shipping_weight', 'length', 'width', 'height', 'material'] },
+    { title: "Policies & Delivery", keys: ['warranty_period', 'return_policy', 'replacement_policy', 'shipping_charge', 'free_shipping', 'cod_available', 'available_cities', 'pickup_location', 'warehouse'] },
+    { title: "Manufacturing Details", keys: ['manufacturer_name', 'country_of_origin', 'hsn_code', 'gst_number'] },
+    { title: "Documents & Resources", keys: ['user_manual_url', 'brochure_url', 'certificate_urls'] },
+    { title: "Vendor Contact", keys: ['contact_number', 'whatsapp_number', 'vendor_email'] }
+  ];
+
+  const groupedSpecs = specGroups.map(group => {
+    const items = [];
+    group.keys.forEach(k => {
+      if (allSpecs[k]) {
+        items.push({ k, v: allSpecs[k] });
+        delete allSpecs[k];
+      }
+    });
+    return { ...group, items };
+  }).filter(g => g.items.length > 0);
+
+  const remainingItems = Object.entries(allSpecs)
+    .filter(([k, v]) => !hiddenKeys.includes(k) && v !== '' && v !== null && v !== undefined)
+    .map(([k, v]) => ({ k, v }));
+
+  if (remainingItems.length > 0) {
+    groupedSpecs.push({ title: "Other Details", items: remainingItems });
+  }
   const PLACEHOLDER = 'https://placehold.co/400x400/f5f5f5/999?text=No+Image';
 
   return (
@@ -151,10 +190,10 @@ export function ProductDetailPage() {
 
         {/* Mobile thumbnail row */}
         {productImages.length > 1 && (
-          <div className="flex gap-2 px-4 py-3 bg-white border-b border-gray-100 overflow-x-auto hide-scrollbar">
+          <div className="flex gap-3 px-4 py-4 bg-white border-b border-gray-100 overflow-x-auto hide-scrollbar">
             {productImages.map((img, i) => (
               <button key={i} onClick={() => { setMainImg(img); setImgError(false); }}
-                className={`w-16 h-16 rounded-xl flex-shrink-0 overflow-hidden border-2 transition-all ${mainImg === img ? 'border-[#88313A]' : 'border-transparent'}`}>
+                className={`w-16 h-16 rounded-2xl flex-shrink-0 overflow-hidden ring-2 transition-all ${mainImg === img ? 'ring-brand-orange ring-offset-2' : 'ring-transparent hover:ring-gray-200'}`}>
                 <img src={img} alt={`thumb-${i}`} className="w-full h-full object-cover" onError={(e) => { e.target.src = PLACEHOLDER; }} />
               </button>
             ))}
@@ -163,7 +202,7 @@ export function ProductDetailPage() {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="max-w-[1400px] mx-auto md:px-8 lg:px-12 md:mt-6 md:grid md:grid-cols-[45%_55%] md:gap-8 lg:gap-12">
+      <div className="max-w-[1400px] mx-auto md:px-8 lg:px-12 md:pt-20 md:pb-16 md:grid md:grid-cols-[45%_55%] md:gap-8 lg:gap-12">
 
         {/* ── DESKTOP LEFT: Images ── */}
         <div className="hidden md:block">
@@ -228,7 +267,7 @@ export function ProductDetailPage() {
           )}
 
           {/* Title */}
-          <h1 className="text-[22px] md:text-3xl font-bold text-gray-900 leading-snug tracking-tight mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight tracking-tight mb-3" style={{ fontFamily: 'Georgia, serif' }}>
             {product.name}
           </h1>
 
@@ -240,13 +279,15 @@ export function ProductDetailPage() {
           </div>
 
           {/* Price */}
-          <div className="flex items-center gap-2 mb-6">
-            <span className="text-2xl font-bold text-gray-900">₹{selectedSizeObj.price.toLocaleString()}</span>
+          <div className="flex items-end gap-3 mb-8">
+            <span className="text-3xl md:text-4xl font-black text-gray-900 tracking-tighter">₹{selectedSizeObj.price.toLocaleString()}</span>
             {originalPrice > selectedSizeObj.price && (
-              <>
-                <span className="text-sm text-gray-400 line-through">₹{originalPrice.toLocaleString()}</span>
-                <span className="text-[10px] font-bold text-[#D97706] bg-[#FEF3C7] px-2 py-0.5 rounded-full ml-1.5">{discountPercent}% OFF</span>
-              </>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-base text-gray-400 line-through font-medium">₹{originalPrice.toLocaleString()}</span>
+                <span className="text-xs font-black text-white bg-gradient-to-r from-red-600 to-rose-500 px-2.5 py-1 rounded-full shadow-sm tracking-wide">
+                  {discountPercent}% OFF
+                </span>
+              </div>
             )}
           </div>
 
@@ -257,13 +298,13 @@ export function ProductDetailPage() {
                 <span className="text-sm font-bold text-gray-700 uppercase tracking-wide">Color</span>
                 {currentVariant?.color && <span className="text-sm text-gray-500">{currentVariant.color}</span>}
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {parsedSizes.map((variant, idx) => (
                   <button key={idx}
                     onClick={() => { setSelectedVariantIdx(idx); setSelectedSizeIdx(0); }}
-                    className={`px-4 py-2 rounded-xl border-2 transition-all text-sm font-semibold ${selectedVariantIdx === idx
-                      ? 'border-brand-orange text-brand-orange bg-orange-50'
-                      : 'border-gray-200 text-gray-600 hover:border-brand-orange/50'}`}>
+                    className={`px-5 py-2.5 rounded-full border-2 transition-all text-sm font-bold tracking-wide ${selectedVariantIdx === idx
+                      ? 'border-gray-900 bg-gray-900 text-white shadow-md'
+                      : 'border-gray-200 text-gray-700 hover:border-gray-900'}`}>
                     {variant.color}
                   </button>
                 ))}
@@ -278,13 +319,13 @@ export function ProductDetailPage() {
                 <span className="text-sm font-bold text-gray-700 uppercase tracking-wide">Size</span>
                 {selectedSizeObj?.size && <span className="text-sm text-gray-500">{selectedSizeObj.size}</span>}
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {currentSizesArray.map((sizeObj, idx) => (
                   <button key={idx}
                     onClick={() => setSelectedSizeIdx(idx)}
-                    className={`px-4 py-2 rounded-xl border-2 transition-all text-sm font-semibold ${selectedSizeIdx === idx
-                      ? 'border-brand-orange text-brand-orange bg-orange-50'
-                      : 'border-gray-200 text-gray-600 hover:border-brand-orange/50'}`}>
+                    className={`px-5 py-2.5 rounded-full border-2 transition-all text-sm font-bold tracking-wide ${selectedSizeIdx === idx
+                      ? 'border-gray-900 bg-gray-900 text-white shadow-md'
+                      : 'border-gray-200 text-gray-700 hover:border-gray-900'}`}>
                     {sizeObj.size}
                   </button>
                 ))}
@@ -342,31 +383,40 @@ export function ProductDetailPage() {
               <span className="w-1 h-5 bg-brand-orange rounded-full inline-block" />
               Product Description
             </h2>
-            <p className="text-[14px] text-gray-600 leading-relaxed">
+            {product.short_description && (
+              <p className="text-[15px] font-semibold text-gray-800 mb-2 leading-snug">{product.short_description}</p>
+            )}
+            <p className="text-[14px] text-gray-600 leading-relaxed whitespace-pre-line">
               {product.description || 'Experience the perfect blend of tradition and quality. This product is carefully crafted to meet your daily needs while maintaining an authentic feel. Suitable for all occasions and built to last.'}
             </p>
           </div>
 
           {/* Specs */}
-          {(product.category || currentVariant?.color || Object.keys(customAttrs).length > 0) && (
+          {groupedSpecs.length > 0 && (
             <div className="mb-4">
-              <h2 className="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2" style={{ fontFamily: 'Georgia, serif' }}>
+              <h2 className="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2" style={{ fontFamily: 'Georgia, serif' }}>
                 <span className="w-1 h-5 bg-brand-orange rounded-full inline-block" />
                 Specifications
               </h2>
-              <div className="rounded-2xl overflow-hidden border border-gray-100">
-                {[
-                  product.category && { k: 'Category', v: product.category },
-                  currentVariant?.color && { k: 'Color', v: currentVariant.color },
-                  ...Object.entries(customAttrs).map(([k, v]) => ({ k: k.replace(/_/g, ' '), v })),
-                ].filter(Boolean).map((row, i) => (
-                  <div key={row.k} className={`flex gap-4 px-4 py-3 text-sm ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                    <span className="text-gray-500 w-32 shrink-0 capitalize font-medium">{row.k}</span>
-                    <span className="text-gray-900 font-semibold">
-                      {String(row.v).startsWith('http')
-                        ? <a href={row.v} target="_blank" rel="noreferrer" className="text-brand-orange hover:underline">View</a>
-                        : row.v}
-                    </span>
+              
+              <div className="flex flex-col gap-6">
+                {groupedSpecs.map((group, gIdx) => (
+                  <div key={gIdx}>
+                    <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-2 pl-1">{group.title}</h3>
+                    <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                      {group.items.map((row, i) => (
+                        <div key={row.k} className={`flex gap-4 px-4 py-3 text-sm ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
+                          <span className="text-gray-500 w-1/3 shrink-0 capitalize font-medium">
+                            {row.k.replace(/_/g, ' ')}
+                          </span>
+                          <span className="text-gray-900 font-semibold w-2/3 break-words">
+                            {String(row.v).startsWith('http')
+                              ? <a href={row.v} target="_blank" rel="noreferrer" className="text-brand-orange hover:underline truncate block">View Document</a>
+                              : row.v}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -392,13 +442,13 @@ export function ProductDetailPage() {
       )}
 
       {/* ── MOBILE sticky action bar ── */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex gap-3 px-4 py-3 z-[60]">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex gap-3 px-4 py-4 z-[60] shadow-[0_-10px_20px_rgba(0,0,0,0.05)] pb-safe">
         <button onClick={handleAddToCart}
-          className="flex-1 bg-white text-[#88313A] border border-[#88313A] font-semibold py-3.5 rounded-full text-[15px] active:scale-95 transition-transform">
+          className="flex-1 bg-white text-gray-900 border-2 border-gray-200 font-bold py-3.5 rounded-2xl text-[15px] active:scale-95 transition-all hover:bg-gray-50 hover:border-gray-300">
           Add to Cart
         </button>
         <button onClick={handleBuyNow}
-          className="flex-1 bg-[#88313A] text-white font-semibold py-3.5 rounded-full text-[15px] active:scale-95 transition-transform shadow-md shadow-[#88313A]/20">
+          className="flex-1 bg-gradient-to-r from-brand-orange to-yellow-500 text-white font-bold py-3.5 rounded-2xl text-[15px] active:scale-95 transition-all shadow-[0_8px_20px_rgba(254,102,3,0.3)]">
           Buy Now
         </button>
       </div>

@@ -51,7 +51,7 @@ export function VendorSignupPage() {
         key: data.key,
         amount: data.order.amount,
         currency: 'INR',
-        name: 'Swabhivar Shoppers',
+        name: 'ULMGH369',
         description: `${selectedPlan.name} Vendor Subscription`,
         order_id: data.order.id,
         handler: (response) => {
@@ -130,13 +130,13 @@ export function VendorSignupPage() {
       <div className="w-full max-w-xl">
         <div className="text-center mb-8">
           <Link to="/" className="inline-block mb-6">
-            <img src={logo} alt="Swabhivar Shoppers" className="h-12 mx-auto mix-blend-multiply" />
+            <img src={logo} alt="ULMGH369" className="h-12 mx-auto mix-blend-multiply" />
           </Link>
           <div className="flex items-center justify-center gap-2 mb-2">
             <Store className="w-6 h-6 text-[#fe6603]" />
             <h1 className="text-3xl font-bold text-gray-900">Become a Vendor</h1>
           </div>
-          <p className="text-gray-500">Apply to sell your products on Swabhivar Shoppers</p>
+          <p className="text-gray-500">Apply to sell your products on ULMGH369</p>
         </div>
 
         <div className="bg-white rounded-[32px] p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative overflow-hidden">

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShieldCheck, Truck, Award, Headset } from 'lucide-react';
+import { Search, ShieldCheck, Truck, Award, Headset, Percent, Smartphone, Shirt, Monitor, Sofa, Sparkles, Zap, Calendar, RefreshCw } from 'lucide-react';
 import { Header } from '../components/Header';
 import { ProductCard } from '../components/ProductCard';
 import { AdBanner } from '../components/AdBanner';
@@ -18,7 +18,7 @@ export function HomePage() {
   const { products, categories, loading } = useStoreData();
   const [banners, setBanners] = React.useState([]);
   const [vendors, setVendors] = React.useState([
-    { id: 'v1', business_name: 'Swabhivar Silks', store_image: 'https://vaarahisilks.com/cdn/shop/articles/Home_Banner_B_1080_x_1650_FHD_49daaf56-8dd9-4544-934c-f17ec4672e1c.jpg?v=1765869118' },
+    { id: 'v1', business_name: 'ULMGH369 Silks', store_image: 'https://vaarahisilks.com/cdn/shop/articles/Home_Banner_B_1080_x_1650_FHD_49daaf56-8dd9-4544-934c-f17ec4672e1c.jpg?v=1765869118' },
     { id: 'v2', business_name: 'Kavya Creations', store_image: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=500&q=80' },
     { id: 'v3', business_name: 'The Loom Story', store_image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80' },
     { id: 'v4', business_name: 'Ethnic Aura', store_image: 'https://vaarahisilks.com/cdn/shop/articles/Home_Banner_B_1080_x_1650_FHD_49daaf56-8dd9-4544-934c-f17ec4672e1c.jpg?v=1765869118' },
@@ -51,260 +51,210 @@ export function HomePage() {
   }, { scope: container, dependencies: [loading] });
 
   return (
-    <div ref={container} className="bg-white min-h-screen pb-0">
+    <div ref={container} className="bg-gray-50/50 min-h-screen pb-20 font-sans">
       <Header variant="home" />
 
-      {/* Mobile Search Bar (Moved from Header) */}
-      <div className="md:hidden px-4 pt-8 pb-2 bg-white">
-        <div
-          className="relative flex items-center cursor-text"
-          onClick={() => navigate('/search')}
-        >
-          <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder="Search sarees, kurtis, brands..."
-            readOnly
-            className="w-full bg-white border border-gray-300 rounded-full py-3.5 pl-14 pr-4 text-[15px] font-medium text-gray-900 placeholder-gray-500 focus:outline-none transition-all shadow-sm cursor-text"
-          />
-        </div>
-      </div>
-
-      <div className="max-w-[1280px] mx-auto px-4 pt-4 mt-1">
-        {/* Location Search Bar */}
-        <Link to="/search" className="block bg-[#FFF8E7] border border-[#FDE1B9] rounded-full px-5 py-3.5 mb-5 flex items-center gap-3 cursor-text transition-all hover:bg-[#FFF4D4]">
-          <svg className="w-5 h-5 text-[#88313A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="8" strokeWidth="2" />
-            <line x1="12" y1="2" x2="12" y2="6" strokeWidth="2" strokeLinecap="round" />
-            <line x1="12" y1="18" x2="12" y2="22" strokeWidth="2" strokeLinecap="round" />
-            <line x1="2" y1="12" x2="6" y2="12" strokeWidth="2" strokeLinecap="round" />
-            <line x1="18" y1="12" x2="22" y2="12" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          <span className="text-[15px] font-medium text-[#88313A]">Search shops near your location</span>
-        </Link>
-      </div>
-
-      {/* 1. Hero Banner Carousel */}
-      <div className="animate-section px-4 md:px-6 mb-8 max-w-[1280px] mx-auto mt-2 md:mt-4">
-        {banners.length > 0 ? (
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar mt-2">
-            {banners.map((banner) => (
-              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-gray-50 aspect-[3/2] md:aspect-[21/9] group border border-gray-100 shadow-sm">
-                <img src={banner.image_url} alt={banner.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end px-6 py-8">
-                  <div className="mb-2">
-                    <span className="bg-black/40 backdrop-blur-md text-white/90 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest">
-                      {banner.badge || 'NEW SEASON'}
-                    </span>
-                  </div>
-                  <h2 className="text-white text-4xl sm:text-5xl font-serif font-bold mb-1 leading-tight tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
-                    {banner.title}
-                  </h2>
-                  <p className="text-white/90 font-medium text-sm tracking-wide">
-                    {banner.subtitle || 'Explore our latest collection'}
-                  </p>
-
-                  <div className="absolute bottom-6 right-6 flex gap-1.5 items-center">
-                    <div className="w-4 h-1.5 rounded-full bg-white"></div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/50"></div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/50"></div>
-                  </div>
-                </div>
-              </div>
-            ))}
+      <div className="max-w-lg mx-auto md:max-w-6xl w-full">
+      {/* 1. Hero Banner: Big Saving Days */}
+      <div className="animate-section px-3 mt-4">
+        <div className="bg-[#122e5a] rounded-2xl p-4 sm:p-6 text-white relative overflow-hidden flex shadow-sm min-h-[160px]">
+          <div className="z-10 w-[55%] flex flex-col justify-center">
+            <span className="bg-[#fcd34d] text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-2 uppercase tracking-wide">Best Deals</span>
+            <h2 className="text-[26px] sm:text-3xl font-extrabold leading-tight mb-2 tracking-tight">
+              Big Saving<br />Days
+            </h2>
+            <p className="text-white/80 text-[11px] sm:text-sm mb-4 leading-tight">
+              Grab Best Deals<br />On Top Brands
+            </p>
+            <button className="bg-white text-gray-900 text-[11px] font-bold py-2 px-3 rounded-md self-start flex items-center gap-1 hover:bg-gray-100 shadow-sm transition-transform active:scale-95">
+              Shop Now <span className="text-sm font-black leading-none">→</span>
+            </button>
           </div>
-        ) : (
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar mt-2">
-            <div className="relative w-full shrink-0 snap-center rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-gray-50 aspect-[3/2] md:aspect-[21/9] group border border-gray-100 shadow-sm">
-              <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end px-6 py-8">
-                <div className="mb-2">
-                  <span className="bg-black/40 backdrop-blur-md text-white/90 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest">
-                    SILK EDIT
-                  </span>
-                </div>
-                <h2 className="text-white text-4xl sm:text-5xl font-serif font-bold mb-1 leading-tight tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
-                  Kanjeevaram<br />Heirlooms
-                </h2>
-                <p className="text-white/90 font-medium text-sm tracking-wide">
-                  Up to 50% off
-                </p>
-
-                <div className="absolute bottom-6 right-6 flex gap-1.5 items-center">
-                  <div className="w-4 h-1.5 rounded-full bg-white"></div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/50"></div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/50"></div>
-                </div>
+          <div className="absolute right-0 top-0 bottom-0 w-[55%] bg-gradient-to-l from-white/10 to-transparent"></div>
+          {/* Dummy image representation with devices */}
+          <div className="w-[45%] flex items-center justify-end z-10 relative pr-2">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <div className="absolute w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+              <div className="w-[70px] h-[90px] bg-[#3b82f6] border-2 border-gray-800 rounded-xl relative z-10 shadow-lg translate-x-2 -translate-y-1">
+                 <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
+                 <div className="absolute top-5 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
+              </div>
+              <div className="w-[45px] h-[55px] bg-gray-900 rounded-lg absolute bottom-2 right-12 z-20 shadow-lg border border-gray-700 flex flex-col items-center justify-center">
+                 <div className="text-[8px] text-white">10:09</div>
+                 <div className="w-4 h-4 rounded bg-[#ef4444] mt-1 grid grid-cols-2 gap-0.5 p-0.5">
+                   <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
+                   <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
+                 </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* 1.5. Shop by Store (Vendors) */}
-      <div className="animate-section z-30 mb-8 px-4 max-w-[1280px] mx-auto mt-8">
-        <div className="flex justify-between items-end mb-4">
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 tracking-tight font-serif mb-1">Shop by Store</h3>
-            <p className="text-gray-500 text-sm">Buy directly from a shop</p>
+          {/* Carousel dots */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+             <div className="w-2 h-2 rounded-full bg-white"></div>
+             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
+             <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
           </div>
-          <Link to="/stores" className="text-[#88313A] hover:text-red-900 text-sm font-medium transition-colors">See all {'>'}</Link>
-        </div>
-        <div className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar pb-4 snap-x">
-          {vendors.map((vendor, i) => (
-            <Link key={vendor.id} to={`/store/${vendor.id}`} className="w-[160px] md:w-[200px] shrink-0 snap-start flex flex-col group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100/50">
-              <div className="w-full aspect-square relative overflow-hidden rounded-3xl">
-                <img
-                  src={vendor.store_image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80'}
-                  alt={vendor.business_name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium px-2.5 py-1 rounded-full">
-                  {((i % 4) * 3 + 5)} items
-                </div>
-              </div>
-              <div className="p-3 pt-2">
-                <h4 className="font-bold text-gray-900 text-sm truncate">{vendor.business_name || 'Vendor Shop'}</h4>
-                <p className="mt-1 text-[11px] text-gray-500 truncate">
-                  {['Kanchipuram, TN', 'Varanasi, UP', 'Jaipur, RJ', 'Surat, GJ'][i % 4]} · ★ 4.{8 - (i % 3)}
-                </p>
-              </div>
-            </Link>
-          ))}
         </div>
       </div>
 
       {/* 2. Categories Ribbon */}
-      <div className="animate-section z-30 mb-8 px-4 max-w-[1280px] mx-auto mt-4">
-        <div className="flex justify-between items-end mb-4">
-          <h3 className="text-2xl font-bold text-gray-900 tracking-tight font-serif">Shop by Category</h3>
-          <Link to="/category/all" className="text-[#88313A] hover:text-red-900 text-sm font-medium transition-colors">See all {'>'}</Link>
+      <div className="animate-section mt-6 mb-4">
+        <div className="flex justify-between items-center px-4 mb-3">
+          <h3 className="text-[16px] md:text-xl font-extrabold text-gray-900 tracking-tight">Shop by Category</h3>
+          <Link to="/category/all" className="text-blue-600 hover:text-blue-700 text-[12px] md:text-sm font-bold flex items-center gap-1 transition-colors">See All <span className="text-[14px] font-black leading-none">→</span></Link>
         </div>
-        <div className="flex gap-4 md:gap-8 justify-start md:justify-center min-w-max mx-auto px-2 overflow-x-auto hide-scrollbar pb-2">
-          {categories.slice(0, 10).map(cat => (
-            <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-3 group w-20 md:w-24">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center p-3 border border-gray-100 shadow-sm transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1 group-hover:border-brand-orange group-hover:shadow-md">
-                {cat.image_url ? (
-                  <img src={cat.image_url} alt={cat.name} className="w-full h-full object-contain relative z-10 mix-blend-multiply" />
-                ) : (
-                  <div className="w-full h-full bg-gray-100 rounded-full"></div>
-                )}
-                <div className="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/5 transition-colors duration-300"></div>
-              </div>
-              <span className="text-[12px] font-medium text-gray-700 text-center group-hover:text-brand-orange transition-colors leading-tight line-clamp-2">{cat.name}</span>
-            </Link>
-          ))}
+        <div className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar px-4 pb-3 snap-x">
+          {categories.map((cat, idx) => {
+            const bgColors = ['bg-[#fff1e6]', 'bg-[#eef2ff]', 'bg-[#ecfdf5]', 'bg-[#eff6ff]', 'bg-[#fffbeb]', 'bg-[#fdf2f8]'];
+            const bg = bgColors[idx % bgColors.length];
+            return (
+              <Link key={cat.id || idx} to={`/category/${cat.id}`} className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group snap-start w-16 md:w-20">
+                <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${bg} flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden p-2.5`}>
+                  {cat.image_url ? (
+                    <img src={cat.image_url} alt={cat.name} className="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" />
+                  ) : (
+                    <Sparkles className="w-6 h-6 text-gray-400" />
+                  )}
+                </div>
+                <span className="text-[11px] md:text-[12px] font-semibold text-gray-800 text-center leading-tight line-clamp-2">{cat.name}</span>
+              </Link>
+            );
+          })}
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full px-4 md:px-6">
-
-        {/* Unified Transparent Block */}
-        <div className="animate-section mb-12 flex flex-col gap-8 md:gap-10">
-
-          {/* Shop by Price */}
-          <div className="pt-2">
-            <div className="mb-4">
-              <h3 className="text-2xl font-bold text-gray-900 tracking-tight font-serif mb-1">Shop by Price</h3>
-              <p className="text-gray-500 text-sm">Find styles in your budget</p>
-            </div>
-            <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4 snap-x">
-              <Link to="/category/all?price=under_1000" className="min-w-[160px] md:min-w-[180px] shrink-0 snap-start bg-[#FFFBF4] border border-[#F4E6D4] rounded-[1.5rem] p-5 flex flex-col items-start transition-all hover:shadow-[0_4px_15px_rgba(0,0,0,0.05)] group">
-                <span className="text-[#7A1D25] text-xl font-bold mb-3">₹</span>
-                <span className="font-bold text-gray-900 text-base md:text-lg mb-1">Under ₹1,000</span>
-                <span className="text-gray-500 text-sm mt-auto flex items-center gap-1 group-hover:text-gray-900 transition-colors">Explore <span>→</span></span>
-              </Link>
-              <Link to="/category/all?price=1000_2000" className="min-w-[160px] md:min-w-[180px] shrink-0 snap-start bg-[#FFFBF4] border border-[#F4E6D4] rounded-[1.5rem] p-5 flex flex-col items-start transition-all hover:shadow-[0_4px_15px_rgba(0,0,0,0.05)] group">
-                <span className="text-[#7A1D25] text-xl font-bold mb-3">₹</span>
-                <span className="font-bold text-gray-900 text-base md:text-lg mb-1">₹1,000 - ₹2,000</span>
-                <span className="text-gray-500 text-sm mt-auto flex items-center gap-1 group-hover:text-gray-900 transition-colors">Explore <span>→</span></span>
-              </Link>
-              <Link to="/category/all?price=2000_5000" className="min-w-[160px] md:min-w-[180px] shrink-0 snap-start bg-[#FFFBF4] border border-[#F4E6D4] rounded-[1.5rem] p-5 flex flex-col items-start transition-all hover:shadow-[0_4px_15px_rgba(0,0,0,0.05)] group">
-                <span className="text-[#7A1D25] text-xl font-bold mb-3">₹</span>
-                <span className="font-bold text-gray-900 text-base md:text-lg mb-1">₹2,000 - ₹5,000</span>
-                <span className="text-gray-500 text-sm mt-auto flex items-center gap-1 group-hover:text-gray-900 transition-colors">Explore <span>→</span></span>
-              </Link>
-              <Link to="/category/all?price=above_5000" className="min-w-[160px] md:min-w-[180px] shrink-0 snap-start bg-[#FFFBF4] border border-[#F4E6D4] rounded-[1.5rem] p-5 flex flex-col items-start transition-all hover:shadow-[0_4px_15px_rgba(0,0,0,0.05)] group">
-                <span className="text-[#7A1D25] text-xl font-bold mb-3">₹</span>
-                <span className="font-bold text-gray-900 text-base md:text-lg mb-1">Above ₹5,000</span>
-                <span className="text-gray-500 text-sm mt-auto flex items-center gap-1 group-hover:text-gray-900 transition-colors">Explore <span>→</span></span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Features Highlights */}
-          <div className="flex items-center justify-between bg-white border border-gray-100 rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-            <div className="flex flex-col items-center text-center gap-1.5 flex-1 border-r border-gray-50 last:border-0">
-              <ShieldCheck className="w-5 h-5 text-blue-500" strokeWidth={1.5} />
-              <div className="flex flex-col">
-                <span className="text-[10px] md:text-xs font-bold text-gray-800 leading-tight">Secure<br />Payments</span>
-                <span className="text-[9px] md:text-[10px] text-gray-400 mt-0.5">100% safe</span>
-              </div>
-            </div>
-            <div className="flex flex-col items-center text-center gap-1.5 flex-1 border-r border-gray-50 last:border-0">
-              <Truck className="w-5 h-5 text-orange-500" strokeWidth={1.5} />
-              <div className="flex flex-col">
-                <span className="text-[10px] md:text-xs font-bold text-gray-800 leading-tight">Fast<br />Delivery</span>
-                <span className="text-[9px] md:text-[10px] text-gray-400 mt-0.5">On-time</span>
-              </div>
-            </div>
-            <div className="flex flex-col items-center text-center gap-1.5 flex-1 border-r border-gray-50 last:border-0">
-              <Award className="w-5 h-5 text-blue-600" strokeWidth={1.5} />
-              <div className="flex flex-col">
-                <span className="text-[10px] md:text-xs font-bold text-gray-800 leading-tight">Best<br />Quality</span>
-                <span className="text-[9px] md:text-[10px] text-gray-400 mt-0.5">Top products</span>
-              </div>
-            </div>
-            <div className="flex flex-col items-center text-center gap-1.5 flex-1">
-              <Headset className="w-5 h-5 text-orange-600" strokeWidth={1.5} />
-              <div className="flex flex-col">
-                <span className="text-[10px] md:text-xs font-bold text-gray-800 leading-tight">24/7<br />Support</span>
-                <span className="text-[9px] md:text-[10px] text-gray-400 mt-0.5">We're here</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Ad Block Below Prices (Sponsored Card) */}
-          <Link to={banners.length > 0 ? (banners[0].link_url || "/category/all") : "/category/all"} className="block bg-[#FFFBF4] border border-[#F4E6D4] rounded-[2rem] p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group">
-            <div className="flex items-center gap-2 mb-4">
-              <svg className="w-4 h-4 text-[#7A1D25]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-              </svg>
-              <span className="text-[11px] font-bold text-[#7A1D25] tracking-widest uppercase">SWABHIVAR • SPONSORED</span>
-            </div>
-
-            <div className="flex flex-col md:flex-row gap-5 md:gap-6 items-stretch">
-              <div className="w-full md:w-56 h-56 rounded-3xl overflow-hidden shrink-0 border border-[#F4E6D4]/50">
-                <img
-                  src={banners.length > 0 ? banners[0].image_url : imgAarti}
-                  alt="Sponsored"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1 w-full py-2">
-                <p className="text-gray-500 text-[13px] font-medium tracking-wider uppercase mb-1">
-                  SABYA COUTURE
-                </p>
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                  {banners.length > 0 ? banners[0].title || 'Bridal Season is Here' : 'Bridal Season is Here'}
-                </h3>
-                <p className="text-[#E87E15] font-medium text-sm md:text-base mb-6">
-                  Flat ₹500 off • Free shipping
-                </p>
-
-                <div className="flex items-center justify-between mt-auto">
-                  <span className="text-2xl md:text-3xl font-extrabold text-[#7A1D25]">₹2,999</span>
-                  <button className="bg-[#7A1D25] hover:bg-[#5C161C] text-white px-6 py-2.5 rounded-full font-bold text-sm md:text-base flex items-center gap-2 transition-colors">
-                    Shop Now <span>→</span>
-                  </button>
+      {/* 3. Info Cards Grid */}
+      <div className="animate-section px-3 mt-6">
+        <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x pb-2">
+          {/* SuperCoin */}
+          <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
+            <div className="relative z-10 pr-8">
+              <div className="flex items-center gap-1.5 mb-2.5">
+                <div className="w-4 h-4 bg-[#ffc107] rounded-full flex items-center justify-center shrink-0">
+                  <Zap className="w-3 h-3 text-white fill-white" strokeWidth={3} />
                 </div>
+                <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">SuperCoin</span>
+              </div>
+              <p className="text-[13px] text-gray-600 font-semibold mb-2">Earned <span className="text-[#16a34a] font-extrabold">120</span></p>
+            </div>
+            <p className="text-[13px] text-[#2563eb] font-semibold cursor-pointer relative z-10">Use Now</p>
+            
+            <div className="absolute right-3 bottom-3 w-[42px] h-[42px] bg-gradient-to-br from-[#ffcd38] to-[#ffb300] rounded-full shadow-sm flex items-center justify-center transform group-hover:scale-105 transition-transform overflow-hidden z-0">
+               <Zap className="w-5 h-5 text-white fill-white transform -rotate-12" strokeWidth={2} />
+               <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-white/60 rounded-full blur-[1px]"></div>
+            </div>
+          </div>
+
+          {/* No Cost EMI */}
+          <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
+            <div className="relative z-10 pr-8">
+              <div className="flex items-center gap-1.5 mb-2.5">
+                <Calendar className="w-4 h-4 text-[#16a34a] shrink-0" strokeWidth={2.5} />
+                <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">No Cost EMI</span>
+              </div>
+              <p className="text-[13px] text-gray-600 font-semibold mb-2 leading-tight">Up to 12 Months</p>
+            </div>
+            <p className="text-[13px] text-[#2563eb] font-semibold cursor-pointer relative z-10">Explore Now</p>
+            
+            <div className="absolute right-3 bottom-3 w-[42px] h-[42px] bg-[#16a34a] rounded-[12px] flex items-center justify-center transform group-hover:scale-105 transition-transform shadow-sm z-0">
+               <Calendar className="w-6 h-6 text-white" strokeWidth={2.5} />
+            </div>
+          </div>
+
+          {/* Exchange Offer */}
+          <div className="shrink-0 snap-start w-[175px] md:w-[200px] bg-white border border-gray-100 rounded-[20px] p-4 shadow-sm relative group hover:shadow-md transition-all flex flex-col justify-between min-h-[115px]">
+            <div className="relative z-10 pr-10">
+              <div className="flex items-center gap-1.5 mb-2.5">
+                <RefreshCw className="w-4 h-4 text-[#f97316] shrink-0" strokeWidth={2.5} />
+                <span className="text-[14px] font-extrabold text-[#0f172a] tracking-tight truncate">Exchange Offer</span>
+              </div>
+              <p className="text-[13px] text-gray-600 font-semibold mb-0.5 leading-tight">Up to ₹15,000 Off</p>
+              <p className="text-[13px] text-gray-900 font-semibold leading-tight">On Old Devices</p>
+            </div>
+            
+            <div className="absolute right-3 bottom-3 w-[42px] h-[42px] flex items-center justify-center transform group-hover:scale-105 transition-transform z-0">
+               <RefreshCw className="w-8 h-8 text-[#f97316]" strokeWidth={3} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. Deal of the Day */}
+      <div className="animate-section px-3 mt-6 mb-6">
+        <div className="bg-white border border-gray-100 rounded-xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] py-3 px-1">
+          <div className="flex items-center justify-between mb-3 px-2">
+            <div className="flex items-center gap-3">
+              <h3 className="text-[15px] font-extrabold text-gray-900 tracking-tight">Deal of the Day</h3>
+              <div className="flex items-center bg-[#ffebeb] text-[#ef4444] font-black text-[11px] px-1.5 py-0.5 rounded shadow-sm tracking-widest border border-red-100">
+                12 <span className="text-red-300 px-0.5 animate-pulse">:</span> 45 <span className="text-red-300 px-0.5 animate-pulse">:</span> 30
               </div>
             </div>
-          </Link>
+            <Link to="/offers" className="text-blue-600 text-[12px] font-bold px-2 py-1 rounded hover:bg-blue-50 transition-colors">View All</Link>
+          </div>
 
+          <div className="flex gap-3 overflow-x-auto hide-scrollbar px-2 pb-2 snap-x">
+            {products.length > 0 ? products.slice(0, 5).map((p, idx) => {
+              const discounts = [40, 18, 50, 25, 30];
+              const off = discounts[idx] || 20;
+              const originalPrice = p.price * (1 + (off / 100));
+              return (
+                <div key={p.id} className="w-[140px] shrink-0 snap-start border border-gray-100 rounded-lg p-2 hover:shadow-md transition-shadow relative bg-white flex flex-col group cursor-pointer" onClick={() => navigate(`/product/${p.id}`)}>
+                  <div className="absolute top-2 left-2 bg-green-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-sm z-10">
+                    {off}% OFF
+                  </div>
+                  <div className="h-[130px] bg-white rounded-md mb-2 p-2 flex items-center justify-center relative overflow-hidden group-hover:bg-gray-50 transition-colors">
+                    {p.image_url ? (
+                      <img src={p.image_url} alt={p.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
+                    ) : (
+                       <div className="w-16 h-16 bg-gray-100 rounded-full"></div>
+                    )}
+                  </div>
+                  <h4 className="text-[12px] font-semibold text-gray-800 line-clamp-1 mb-1">{p.name}</h4>
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <span className="text-[13px] font-extrabold text-gray-900">₹{p.price}</span>
+                    <span className="text-[10px] text-gray-400 font-medium line-through">₹{Math.round(originalPrice)}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-[9px] font-bold text-blue-600 border border-blue-100 bg-blue-50 w-fit px-1 py-0.5 rounded-sm">
+                    <ShieldCheck className="w-3 h-3 fill-blue-600 text-white" /> Assured
+                  </div>
+                </div>
+              );
+            }) : (
+              <div className="w-full text-center py-8 text-gray-500 text-sm">Loading deals...</div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* 5. Sponsored Banner */}
+      <div className="animate-section px-3 mb-10">
+        <div className="bg-gradient-to-r from-[#0d9488] to-[#14b8a6] rounded-xl p-4 text-white relative overflow-hidden flex items-center shadow-[0_4px_15px_rgba(20,184,166,0.3)]">
+           <div className="absolute top-1 left-2 text-white/60 text-[9px] uppercase font-bold tracking-widest">Sponsored</div>
+           <div className="z-10 w-[60%] pt-3">
+             <h3 className="text-[15px] sm:text-lg font-extrabold leading-tight mb-2 tracking-tight">Extra 10% Off<br/>On ICICI Bank Cards</h3>
+             <button className="text-white text-[11px] font-bold flex items-center gap-1 hover:underline">
+               Shop Now <span className="font-black">→</span>
+             </button>
+           </div>
+           <div className="w-[40%] flex justify-end z-10 relative">
+              <div className="w-24 h-14 bg-gradient-to-br from-[#f97316] to-[#dc2626] rounded-lg shadow-xl flex flex-col justify-center px-2 transform -rotate-6 border border-white/20">
+                 <div className="flex items-center gap-1 mb-0.5">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-sm"></div>
+                    <span className="text-[8px] font-extrabold italic tracking-wider">ICICI Bank</span>
+                 </div>
+                 <div className="flex gap-1 opacity-50">
+                   <div className="w-3 h-1 bg-white rounded-full"></div>
+                   <div className="w-3 h-1 bg-white rounded-full"></div>
+                   <div className="w-3 h-1 bg-white rounded-full"></div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+
+      <div className="animate-section px-3 mb-12 flex flex-col gap-8 md:gap-10">
           {/* Best Sellers */}
           {products.filter(p => p.is_bestseller).length > 0 && (
             <div>
@@ -464,7 +414,7 @@ export function HomePage() {
                 { name: "Priya Sharma", rating: 5, review: "Absolutely in love with the silk saree I bought! The quality is top-notch and the delivery was super fast." },
                 { name: "Anjali Verma", rating: 5, review: "The festive collection is amazing. Bought a lehenga for my sister's wedding and everyone complimented it." },
                 { name: "Sneha Reddy", rating: 4, review: "Great products and good prices. The cotton kurti fits perfectly and is very comfortable." },
-                { name: "Riya Kapoor", rating: 5, review: "SWABHIVAR SHOPPER never disappoints. The app is so easy to use and the customer service is excellent." }
+                { name: "Riya Kapoor", rating: 5, review: "ULMGH369 never disappoints. The app is so easy to use and the customer service is excellent." }
               ].map((rev, idx) => (
                 <div key={idx} className="w-[280px] shrink-0 snap-start bg-white p-6 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 flex flex-col justify-between">
                   <div>
@@ -515,8 +465,8 @@ export function HomePage() {
               </div>
             </div>
           </div>
+      </div>
 
-        </div>
       </div>
 
     </div>

@@ -34,8 +34,10 @@ export function CheckoutPage() {
   const iconRef = useRef(null);
   const textRef = useRef(null);
 
-  const grandTotal = getTotal();
+  const discount = location.state?.discount || 0;
   const couponCode = location.state?.couponCode || '';
+  const baseTotal = getTotal();
+  const grandTotal = Math.max(0, baseTotal - discount);
 
   const handleProceedToPayment = () => {
     if (!address.name.trim() || !address.line1.trim() || !address.city.trim() || !address.state.trim() || !address.pincode.trim() || !address.mobile.trim()) {
@@ -431,6 +433,12 @@ export function CheckoutPage() {
               </div>
 
               <div className="border-t border-dashed border-gray-200 pt-5 mb-6">
+                {discount > 0 && (
+                  <div className="flex justify-between font-bold text-gray-700 text-sm mb-3">
+                    <span>Coupon Discount</span>
+                    <span className="text-green-600">-₹{discount.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between font-extrabold text-gray-900 text-xl">
                   <span>Grand Total</span>
                   <span className="text-brand-orange">₹{grandTotal.toFixed(2)}</span>

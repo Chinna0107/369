@@ -259,38 +259,11 @@ export function CategoryListingPage() {
       {categoryId === 'all' ? (
         <div className="bg-[#FFFDF9] shadow-sm border-b border-gray-100 pb-6">
           <div className="px-4 py-4 flex items-center gap-3 bg-[#FFFDF9] max-w-7xl mx-auto">
-            <div className="flex-1 relative group">
-              <Search className="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-brand-orange transition-colors" />
-              <input
-                type="text"
-                value={searchQuery || ''}
-                onChange={(e) => {
-                  const newParams = Object.fromEntries(searchParams.entries());
-                  if (e.target.value) newParams.search = e.target.value;
-                  else delete newParams.search;
-                  setSearchParams(newParams);
-                }}
-                placeholder="Search shop name, products, categories"
-                className="w-full bg-white border border-gray-200 rounded-full py-2.5 pl-11 pr-10 text-[15px] text-gray-900 focus:outline-none focus:ring-1 focus:border-brand-orange focus:shadow-sm transition-all placeholder-gray-400"
-              />
-              {searchQuery && (
-                <button 
-                  onClick={() => {
-                    const newParams = Object.fromEntries(searchParams.entries());
-                    delete newParams.search;
-                    setSearchParams(newParams);
-                  }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 p-1.5 rounded-full hover:bg-gray-100 transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
+            {/* Search bar removed, using header search */}
             <button onClick={() => setShowMobileFilters(true)} className="w-10 h-10 bg-[#8E112E] rounded-full flex items-center justify-center text-white shadow-sm hover:bg-[#720e25] transition-colors shrink-0">
               <SlidersHorizontal className="w-4 h-4" />
             </button>
           </div>
-
 
         </div>
       ) : (
