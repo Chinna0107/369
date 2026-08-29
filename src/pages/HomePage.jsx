@@ -113,7 +113,9 @@ export function HomePage() {
                 <Link key={cat.id || idx} to={`/category/${cat.id}`} className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group snap-start w-16 md:w-20">
                   <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${bg} flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden p-2.5`}>
                     {cat.image_url ? (
-                      <img src={cat.image_url} alt={cat.name} className="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" />
+                      <img src={cat.image_url} alt={cat.name} 
+                           onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
+                           className="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" />
                     ) : (
                       <Sparkles className="w-6 h-6 text-gray-400" />
                     )}
@@ -206,7 +208,9 @@ export function HomePage() {
                     </div>
                     <div className="h-[130px] bg-white rounded-md mb-2 p-2 flex items-center justify-center relative overflow-hidden group-hover:bg-gray-50 transition-colors">
                       {p.image_url ? (
-                        <img src={p.image_url} alt={p.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
+                        <img src={p.image_url} alt={p.name} 
+                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
+                             className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
                       ) : (
                         <div className="w-16 h-16 bg-gray-100 rounded-full"></div>
                       )}

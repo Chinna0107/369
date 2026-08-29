@@ -277,7 +277,9 @@ export function CategoryListingPage() {
               </p>
             </div>
             <div className="w-28 h-28 md:w-40 md:h-40 shrink-0 rounded-full bg-white p-2 border border-brand-orange/30 shadow-sm hidden md:block group-hover:shadow-md transition-all">
-              <img src={bannerImg} alt={categoryName} className="w-full h-full object-cover rounded-full" />
+              <img src={bannerImg} alt={categoryName} 
+                   onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
+                   className="w-full h-full object-cover rounded-full" />
             </div>
           </div>
         </div>
@@ -352,7 +354,9 @@ export function CategoryListingPage() {
               <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-3 group">
                 <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center border overflow-hidden transition-all ${categoryId === cat.id.toString() ? 'border-brand-orange border-2 shadow-sm bg-orange-50/50' : 'border-gray-200 bg-white p-1 group-hover:border-brand-orange group-hover:shadow-sm'}`}>
                   {cat.image_url ? (
-                    <img src={cat.image_url} alt={cat.name} className="w-full h-full object-cover rounded-xl" />
+                    <img src={cat.image_url} alt={cat.name} 
+                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
+                         className="w-full h-full object-cover rounded-xl" />
                   ) : (
                     <img src={imgAarti} alt="Cat" className="w-full h-full object-cover opacity-50 rounded-xl mix-blend-multiply" />
                   )}

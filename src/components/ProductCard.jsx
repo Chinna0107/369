@@ -150,6 +150,12 @@ export function ProductCard({ product, layout = 'grid' }) {
     addToCart(product, defaultSize);
   };
 
+  const handleBuyNow = (e) => {
+    e.preventDefault(); e.stopPropagation();
+    addToCart(product, defaultSize);
+    navigate('/checkout');
+  };
+
   const handleCardClick = () => navigate(`/product/${product.id}`);
 
   /* ── LIST LAYOUT ── */
@@ -242,8 +248,22 @@ export function ProductCard({ product, layout = 'grid' }) {
           <span className="text-[#9061DF] text-[10px] md:text-[11px] font-medium">+50 pts</span>
         </div>
 
-        <div className="mt-auto pt-1">
-          <p className="text-gray-500 text-[11px] md:text-xs">4-day replacements</p>
+        <div className="mt-auto pt-2 pb-1">
+          <p className="text-gray-500 text-[11px] md:text-xs mb-2">4-day replacements</p>
+          <div className="flex gap-2">
+            <button 
+              onClick={handleAddToCart} 
+              className="flex-1 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:text-brand-orange hover:border-brand-orange/30 font-bold py-2 rounded-xl text-xs md:text-sm transition-all shadow-sm"
+            >
+              Add to Cart
+            </button>
+            <button 
+              onClick={handleBuyNow} 
+              className="flex-1 bg-brand-orange hover:bg-orange-600 text-white font-bold py-2 rounded-xl text-xs md:text-sm transition-all shadow-sm"
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       </div>
     </div>

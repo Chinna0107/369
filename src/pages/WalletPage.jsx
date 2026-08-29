@@ -1,5 +1,6 @@
 import React from 'react';
 import { Wallet, ArrowUpRight, ArrowDownLeft, Clock, CreditCard, Gift, ShieldCheck } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export function WalletPage() {
   const balance = 1240;
@@ -29,12 +30,12 @@ export function WalletPage() {
           <p className="text-sm text-gray-300 font-medium tracking-wide uppercase mb-1">Available Balance</p>
           <h2 className="text-4xl font-extrabold mb-4 font-serif">₹{balance.toLocaleString()}</h2>
           
-          <div className="flex gap-3 mt-6">
-            <button className="flex-1 bg-brand-orange hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm">
-              Add Money
-            </button>
-            <button className="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold py-2.5 rounded-xl text-sm transition-all">
-              Send to Bank
+          <div className="flex mt-6">
+            <button 
+              onClick={() => toast.success('Your redeem request has been processed. You can use this balance while shopping!')}
+              className="w-full bg-brand-orange hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm"
+            >
+              Redeem
             </button>
           </div>
         </div>

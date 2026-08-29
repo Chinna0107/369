@@ -212,7 +212,9 @@ function DesktopFullHeader({ cartCount, wishlistCount, token, user, handleLogout
                         }}
                         className="flex items-center gap-3 p-3 hover:bg-brand-orange/5 cursor-pointer border-b border-gray-50 last:border-b-0 transition-colors"
                       >
-                        <img src={product.displayImg} alt={product.name} className="w-10 h-10 object-cover rounded-lg border border-gray-100" />
+                        <img src={product.displayImg} alt={product.name} 
+                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
+                             className="w-10 h-10 object-cover rounded-lg border border-gray-100" />
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-gray-900 truncate">{product.name}</p>
                           <p className="text-xs font-medium text-brand-orange">₹{product.displayPrice}</p>
@@ -528,7 +530,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                   onChange={handleSearchChange}
                   onKeyDown={handleSearchEnter}
                 />
-                <ScanLine className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 cursor-pointer hover:text-brand-orange" />
+                {/* <ScanLine className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 cursor-pointer hover:text-brand-orange" /> */}
                 {searchResults && searchResults.length > 0 && (
                   <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] max-h-[250px] overflow-y-auto">
                     {searchResults.map((product) => (
@@ -540,7 +542,9 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                         }}
                         className="flex items-center gap-3 p-3 hover:bg-brand-orange/5 cursor-pointer border-b border-gray-50 last:border-b-0 transition-colors"
                       >
-                        <img src={product.displayImg} alt={product.name} className="w-10 h-10 object-cover rounded-lg border border-gray-100" />
+                        <img src={product.displayImg} alt={product.name} 
+                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
+                             className="w-10 h-10 object-cover rounded-lg border border-gray-100" />
                         <div className="flex-1 min-w-0">
                           <p className="text-[13px] font-semibold text-gray-900 truncate">{product.name}</p>
                           <p className="text-xs font-medium text-brand-orange">₹{product.displayPrice}</p>
