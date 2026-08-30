@@ -245,8 +245,13 @@ export function ProductDetailPage() {
 
           {/* Desktop action buttons */}
           <div className="flex gap-3 mt-5">
+            <button onClick={() => toggleWishlist(product.id)}
+              className="w-16 shrink-0 border-2 border-gray-200 rounded-2xl flex items-center justify-center hover:border-red-200 hover:bg-red-50 transition-all active:scale-95"
+              title={isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}>
+              <Heart className={`w-6 h-6 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-500'}`} strokeWidth={isWishlisted ? 0 : 1.5} />
+            </button>
             <button onClick={handleAddToCart}
-              className="flex-1 border-2 border-brand-orange text-brand-orange font-bold py-4 rounded-2xl text-[15px] flex items-center justify-center gap-2 hover:bg-orange-50 transition-all shadow-sm active:scale-95">
+              className="flex-[1] border-2 border-brand-orange text-brand-orange font-bold py-4 rounded-2xl text-[15px] flex items-center justify-center gap-2 hover:bg-orange-50 transition-all shadow-sm active:scale-95">
               <ShoppingCart className="w-5 h-5" /> Add to Cart
             </button>
             <button onClick={handleBuyNow}
@@ -442,13 +447,20 @@ export function ProductDetailPage() {
       )}
 
       {/* ── MOBILE sticky action bar ── */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex gap-3 px-4 py-4 z-[60] shadow-[0_-10px_20px_rgba(0,0,0,0.05)] pb-safe">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex gap-3 px-4 py-3 z-[60] shadow-[0_-10px_20px_rgba(0,0,0,0.05)] pb-safe">
+        <button onClick={() => toggleWishlist(product.id)}
+          className="w-12 shrink-0 flex flex-col items-center justify-center gap-1 active:scale-95 transition-all group">
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isWishlisted ? 'bg-red-50' : 'bg-gray-50 group-hover:bg-gray-100'}`}>
+            <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-[#88313A] text-[#88313A]' : 'text-gray-600'}`} strokeWidth={isWishlisted ? 0 : 1.5} />
+          </div>
+          <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wide leading-none">{isWishlisted ? 'Saved' : 'Save'}</span>
+        </button>
         <button onClick={handleAddToCart}
-          className="flex-1 bg-white text-gray-900 border-2 border-gray-200 font-bold py-3.5 rounded-2xl text-[15px] active:scale-95 transition-all hover:bg-gray-50 hover:border-gray-300">
+          className="flex-[1.2] bg-white text-gray-900 border-2 border-gray-200 font-bold py-3 rounded-2xl text-[14px] active:scale-95 transition-all hover:bg-gray-50 hover:border-gray-300">
           Add to Cart
         </button>
         <button onClick={handleBuyNow}
-          className="flex-1 bg-gradient-to-r from-brand-orange to-yellow-500 text-white font-bold py-3.5 rounded-2xl text-[15px] active:scale-95 transition-all shadow-[0_8px_20px_rgba(254,102,3,0.3)]">
+          className="flex-[1.3] bg-gradient-to-r from-brand-orange to-yellow-500 text-white font-bold py-3 rounded-2xl text-[14px] active:scale-95 transition-all shadow-[0_4px_15px_rgba(254,102,3,0.25)]">
           Buy Now
         </button>
       </div>

@@ -27,7 +27,7 @@ export function WishlistPage() {
     <div className="min-h-screen bg-[#f9f9f9] pb-24 font-sans">
       <Header />
       
-      <div className="max-w-[1200px] mx-auto px-4 md:px-0 py-6 md:py-8 flex flex-col md:flex-row gap-6 md:gap-8 mt-16 md:mt-0">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-0 py-6 md:py-8 flex flex-col md:flex-row gap-6 md:gap-8 md:mt-0">
         
         {/* Desktop Sidebar */}
         <div className="hidden md:block w-72 shrink-0">
@@ -63,8 +63,8 @@ export function WishlistPage() {
           </div>
 
           {wishlistProducts.length === 0 ? (
-             <div className="flex flex-col items-center justify-center py-24 text-center px-4">
-               <div className="mb-6 w-32 h-32 bg-orange-50 rounded-full flex items-center justify-center border border-orange-100 shadow-inner">
+             <div className="flex flex-col items-center justify-center py-10 md:py-24 text-center px-4">
+               <div className="mb-4 md:mb-6 w-28 h-28 md:w-32 md:h-32 bg-orange-50 rounded-full flex items-center justify-center border border-orange-100 shadow-inner">
                  <Heart className="w-16 h-16 text-brand-orange/40" />
                </div>
                <h2 className="text-xl font-bold text-[#022A21] mb-2 font-serif">Empty Wishlist</h2>

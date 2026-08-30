@@ -273,6 +273,45 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [localSearch, setLocalSearch] = useState('');
+  const [locationName, setLocationName] = useState('Allow location access');
+  const [isFetchingLocation, setIsFetchingLocation] = useState(false);
+  const [estimatedTime, setEstimatedTime] = useState('8 min');
+
+  const handleLocationClick = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+    
+    setIsFetchingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+          const data = await res.json();
+          if (data && data.display_name) {
+            const parts = data.display_name.split(',');
+            const shortAddress = parts.slice(0, 3).join(',').trim();
+            setLocationName(shortAddress);
+            setEstimatedTime('12 min');
+          } else {
+            setLocationName('Location found');
+          }
+        } catch (error) {
+          console.error("Error fetching location:", error);
+          setLocationName('Location found');
+        } finally {
+          setIsFetchingLocation(false);
+        }
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        alert("Unable to retrieve location. Please check settings.");
+        setIsFetchingLocation(false);
+      }
+    );
+  };
 
   useEffect(() => {
     setLocalSearch(searchParams.get('search') || '');
@@ -455,8 +494,8 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
           )}
         </AnimatePresence>
 
-        <div className={hideSearch ? "h-[105px]" : "h-[170px]"} />
-        <header className="fixed top-0 left-0 z-50 w-full bg-white pb-3 shadow-sm border-b border-gray-100">
+        <div className={effectiveHideSearch ? "h-[105px]" : "h-[220px]"} />
+        <header className={`fixed top-0 left-0 z-50 w-full pb-3 ${effectiveHideSearch ? 'bg-transparent' : 'bg-white shadow-sm border-b border-gray-100'}`}>
           <div className="absolute top-0 left-0 w-full h-[170px] overflow-hidden pointer-events-none z-0">
             <svg viewBox="0 0 375 170" className="w-full h-full" preserveAspectRatio="none">
               <defs>
@@ -469,7 +508,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                 </filter>
               </defs>
               {/* Full white background */}
-              <rect width="375" height="170" fill="white" />
+              <rect width="375" height={effectiveHideSearch ? "105" : "170"} fill="white" />
               
               {/* Back Cream Wave (Single Elegant S-Curve) */}
               <path d="M 0,-50 L 375,-50 L 375,115 C 225,115 150,30 0,30 Z" fill="#ffedd5" opacity="0.8" />
@@ -491,8 +530,8 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                     <h1 className="text-gray-900 font-bold text-[17px] tracking-wide bg-white/80 px-3 py-1 rounded-full backdrop-blur-sm shadow-sm">{title}</h1>
                   </div>
                 ) : (
-                  <Link to="/" className="-ml-1">
-                    <img src={logo} alt="Logo" className="h-14 w-auto object-contain" />
+                  <Link to="/" className="-ml-2 mt-[-8px]">
+                    <img src={logo} alt="Logo" className="h-20 w-auto object-contain" />
                   </Link>
                 )}
               </div>
@@ -517,6 +556,30 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
                 </button>
               </div>
             </div>
+
+            {/* Location & Time Bar */}
+            {!effectiveHideSearch && (
+              <div className="flex items-center gap-3 mb-3">
+                <button
+                  onClick={handleLocationClick}
+                  className="flex-1 flex items-center justify-between bg-white border-2 border-pink-100 shadow-sm rounded-2xl px-4 py-2.5 active:scale-[0.98] transition-transform overflow-hidden"
+                >
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    <div className="bg-gray-800 rounded-full p-1 shrink-0">
+                      <MapPin className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
+                    </div>
+                    <span className="text-[13px] font-bold text-gray-800 truncate">
+                      {isFetchingLocation ? 'Locating...' : locationName}
+                    </span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-600 shrink-0 ml-1" strokeWidth={2} />
+                </button>
+                <div className="bg-[#991b54] text-white px-4 py-2.5 rounded-2xl flex items-baseline gap-1 shadow-md shrink-0 border border-[#801646]">
+                  <span className="font-extrabold text-[17px]">{estimatedTime.split(' ')[0]}</span>
+                  <span className="text-[12px] font-bold">{estimatedTime.split(' ')[1] || 'min'}</span>
+                </div>
+              </div>
+            )}
 
             {/* Search Bar */}
             {!effectiveHideSearch && (
