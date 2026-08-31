@@ -190,7 +190,7 @@ const GroupedCategories = () => {
   ];
 
   return (
-    <div className="w-full my-6 flex flex-col gap-6 px-3">
+    <div className="w-full my-6 flex flex-col gap-6 md:gap-8">
       {groups.map((group, idx) => (
         <div key={idx} className="bg-white px-3 py-5 md:px-6 md:py-6 rounded-[24px] shadow-sm border border-gray-100">
           <h3 className="text-[19px] font-extrabold text-gray-900 mb-5">{group.title}</h3>
@@ -282,7 +282,7 @@ export function HomePage() {
   }, { scope: container, dependencies: [loading] });
 
   return (
-    <div ref={container} className="bg-gray-50/50 min-h-screen pb-20 font-sans">
+    <div ref={container} className="bg-gray-50/50 min-h-screen pb-8 md:pb-8 font-sans">
       <Header variant="home" />
 
       <div className="max-w-lg mx-auto md:max-w-6xl w-full">
@@ -331,9 +331,9 @@ export function HomePage() {
         </div>
 
         {/* 2. Categories Grid */}
-        <div className="animate-section px-3 mt-6 mb-4">
-          <div className="bg-white rounded-[24px] shadow-sm border border-gray-100 p-4 md:p-6">
-            <div className="grid grid-cols-5 gap-y-5 gap-x-2 md:gap-x-4">
+        <div className="animate-section px-2 md:px-3 mt-6 mb-4">
+          <div className="bg-white rounded-[20px] md:rounded-[24px] shadow-sm border border-gray-100 p-2.5 md:p-6">
+            <div className="grid grid-cols-5 gap-y-5 gap-x-1 sm:gap-x-2 md:gap-x-4">
               {/* "All Categories" Item */}
               <Link to="/category/all" className="flex flex-col items-center gap-2 cursor-pointer group">
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#f0f4ff] flex items-center justify-center transition-transform group-hover:scale-105 overflow-hidden p-3">
@@ -533,7 +533,7 @@ export function HomePage() {
           </div>
         </div>
 
-        <div className="animate-section px-3 mb-12 flex flex-col gap-8 md:gap-10">
+        <div className="animate-section px-3 mb-0 md:mb-12 flex flex-col gap-8 md:gap-10">
           {/* Best Sellers (Teal Theme) */}
           {products.filter(p => p.is_bestseller).length > 0 && (
             <div className="relative pt-6 mt-2 -mx-3 md:mx-0">
@@ -639,9 +639,7 @@ export function HomePage() {
           )}
 
           {/* Animated Banner Carousel */}
-          <div className="px-3">
-            <AnimatedBannerCarousel />
-          </div>
+          <AnimatedBannerCarousel />
 
           {/* Trending (Orange Theme) */}
           {products.filter(p => p.is_trending).length > 0 && (
@@ -884,35 +882,56 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Bottom Features Block (Free Delivery, etc) */}
-          <div className="bg-white py-6 px-4 md:p-8 rounded-2xl mt-0 mb-0 shadow-sm border border-gray-100">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x-0 md:divide-x divide-gray-100">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 text-2xl border border-emerald-100">✈️</div>
-                <div>
-                  <h4 className="text-gray-900 font-semibold">Free Delivery</h4>
-                  <p className="text-gray-500 text-xs md:text-sm">On orders over $50</p>
+          {/* Premium Bottom Features Block */}
+          <div className="px-3 mb-6 mt-4">
+            <div className="bg-gradient-to-br from-white to-gray-50 p-5 md:p-8 rounded-[28px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white relative overflow-hidden">
+              {/* Decorative Background Elements */}
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-green-400/10 to-yellow-400/10 rounded-full blur-3xl pointer-events-none"></div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 relative z-10">
+                {/* Free Delivery */}
+                <div className="bg-white/80 backdrop-blur-md p-4 md:p-5 rounded-[20px] border border-gray-50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col gap-3 md:gap-4">
+                  <div className="w-11 h-11 md:w-12 md:h-12 rounded-[14px] bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center text-blue-600 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                    <Truck className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-gray-900 font-extrabold text-[14px] md:text-[15px] tracking-tight mb-0.5">Free Delivery</h4>
+                    <p className="text-gray-500 text-[11px] md:text-[12px] font-medium leading-tight">On orders over ₹500</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                <div className="w-12 h-12 rounded-full bg-[#022A21]/10 flex items-center justify-center text-[#022A21] text-2xl border border-[#022A21]/20">🔄</div>
-                <div>
-                  <h4 className="text-gray-900 font-semibold">Easy Replacements</h4>
-                  <p className="text-gray-500 text-xs md:text-sm">30 days replacement policy</p>
+
+                {/* Easy Replacements */}
+                <div className="bg-white/80 backdrop-blur-md p-4 md:p-5 rounded-[20px] border border-gray-50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col gap-3 md:gap-4">
+                  <div className="w-11 h-11 md:w-12 md:h-12 rounded-[14px] bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center text-orange-600 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                    <RefreshCw className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-gray-900 font-extrabold text-[14px] md:text-[15px] tracking-tight mb-0.5">Easy Returns</h4>
+                    <p className="text-gray-500 text-[11px] md:text-[12px] font-medium leading-tight">30-day replacement</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-2xl border border-green-100">🔒</div>
-                <div>
-                  <h4 className="text-gray-900 font-semibold">Secure Payments</h4>
-                  <p className="text-gray-500 text-xs md:text-sm">100% secure checkout</p>
+
+                {/* Secure Payments */}
+                <div className="bg-white/80 backdrop-blur-md p-4 md:p-5 rounded-[20px] border border-gray-50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col gap-3 md:gap-4">
+                  <div className="w-11 h-11 md:w-12 md:h-12 rounded-[14px] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                    <ShieldCheck className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-gray-900 font-extrabold text-[14px] md:text-[15px] tracking-tight mb-0.5">100% Secure</h4>
+                    <p className="text-gray-500 text-[11px] md:text-[12px] font-medium leading-tight">Safe encrypted checkout</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-500 text-2xl border border-yellow-100">🏆</div>
-                <div>
-                  <h4 className="text-gray-900 font-semibold">Best Prices</h4>
-                  <p className="text-gray-500 text-xs md:text-sm">Guaranteed deals</p>
+
+                {/* Best Prices */}
+                <div className="bg-white/80 backdrop-blur-md p-4 md:p-5 rounded-[20px] border border-gray-50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col gap-3 md:gap-4">
+                  <div className="w-11 h-11 md:w-12 md:h-12 rounded-[14px] bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center text-purple-600 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                    <Award className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-gray-900 font-extrabold text-[14px] md:text-[15px] tracking-tight mb-0.5">Best Prices</h4>
+                    <p className="text-gray-500 text-[11px] md:text-[12px] font-medium leading-tight">Guaranteed top deals</p>
+                  </div>
                 </div>
               </div>
             </div>
