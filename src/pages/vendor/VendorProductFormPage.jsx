@@ -269,6 +269,12 @@ export function VendorProductFormPage() {
   const handleSave = async (publishStatus) => {
     if (!form.name) { toast.error('Product name is required'); setActiveTab('basic'); return; }
     if (!form.category) { toast.error('Category is required'); setActiveTab('basic'); return; }
+    
+    if (form.mrp && form.price && parseFloat(form.mrp) < parseFloat(form.price)) {
+      toast.error('MRP cannot be less than the Regular Price');
+      setActiveTab('pricing');
+      return;
+    }
 
     setSaving(publishStatus || 'saving');
     try {

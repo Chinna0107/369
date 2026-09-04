@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Heart, ShoppingCart, Star, Share2 } from 'lucide-react';
 import { useWishlistStore } from '../store/useWishlistStore';
 import { useCartStore } from '../store/useCartStore';
+import { useStoreData } from '../store/useStoreData';
 
 // Category-based image fallback — high quality Unsplash images per category keyword
 const CATEGORY_IMAGES = {
@@ -126,6 +127,28 @@ export function ProductCard({ product, layout = 'grid' }) {
 
   const firstImg = getFirstImage(product, parsedSizes);
   const displayPrice = getProductPrice(product, parsedSizes);
+  const { offers } = useStoreData();
+
+  // Find best matching auto-applied offer for this product
+  const matchingOffer = offers
+    .filter(o => o.offer_type === 'offer' && o.is_active !== false)
+    .find(o => {
+      if (o.scope === 'all') return true;
+      if (o.scope === 'category') {
+        const cats = typeof o.category_ids === 'string' ? JSON.parse(o.category_ids) : (o.category_ids || []);
+        return cats.includes(product?.category);
+      }
+      if (o.scope === 'product') {
+        const pids = typeof o.product_ids === 'string' ? JSON.parse(o.product_ids) : (o.product_ids || []);
+        return pids.includes(product?.id?.toString()) || pids.includes(product?.id);
+      }
+      return false;
+    });
+
+  const offerDiscount = matchingOffer ? parseFloat(matchingOffer.discount_percent) : 0;
+  const effectivePrice = offerDiscount > 0 ? Math.round(displayPrice * (1 - offerDiscount / 100)) : displayPrice;
+  const originalPrice = Number(product?.mrp) || Math.round(displayPrice * 1.4);
+  const discountPercent = originalPrice > 0 ? Math.round(((originalPrice - effectivePrice) / originalPrice) * 100) : 0;
   // firstImg always returns a valid URL (category fallback if needed)
   // onError swaps to category fallback in case of network issues
   const fallbackImg = getCategoryFallback(product);
@@ -178,8 +201,8 @@ export function ProductCard({ product, layout = 'grid' }) {
           </div>
           <div className="flex items-center justify-between mt-auto">
             <div className="flex items-center gap-2">
-              <span className="text-base font-bold text-gray-900">₹{displayPrice?.toLocaleString('en-IN')}</span>
-              <span className="text-xs text-gray-400 line-through">₹{Math.round(displayPrice * 1.4)?.toLocaleString('en-IN')}</span>
+              <span className="text-base font-bold text-gray-900">₹{effectivePrice?.toLocaleString('en-IN')}</span>
+              {originalPrice > effectivePrice && <span className="text-xs text-gray-400 line-through">₹{originalPrice?.toLocaleString('en-IN')}</span>}
             </div>
             <button onClick={handleAddToCart}
               className="bg-brand-orange hover:bg-orange-600 text-white transition-colors p-2.5 rounded-xl relative z-20 active:scale-95 shadow-sm hover:shadow-md">
@@ -205,9 +228,11 @@ export function ProductCard({ product, layout = 'grid' }) {
       className="group flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 h-full relative bg-white border border-gray-100 pb-3">
 
       {/* Discount badge */}
-      <div className="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] md:text-xs font-extrabold px-3 py-1.5 rounded-full z-20 shadow-md tracking-wider">
-        {(Math.round(((displayPrice * 1.4 - displayPrice) / (displayPrice * 1.4)) * 100))}% OFF
-      </div>
+      {discountPercent > 0 && (
+        <div className="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] md:text-xs font-extrabold px-3 py-1.5 rounded-full z-20 shadow-md tracking-wider">
+          {discountPercent}% OFF
+        </div>
+      )}
 
       {/* Wishlist */}
       <div className="absolute top-3 right-3 z-20">
@@ -239,8 +264,8 @@ export function ProductCard({ product, layout = 'grid' }) {
         </h3>
 
         <div className="flex items-end gap-2.5 mb-3">
-          <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">₹{displayPrice?.toLocaleString('en-IN')}</span>
-          <span className="text-xs md:text-sm text-gray-400 line-through mb-1 font-medium">₹{Math.round(displayPrice * 1.4)?.toLocaleString('en-IN')}</span>
+          <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">₹{effectivePrice?.toLocaleString('en-IN')}</span>
+          {originalPrice > effectivePrice && <span className="text-xs md:text-sm text-gray-400 line-through mb-1 font-medium">₹{originalPrice?.toLocaleString('en-IN')}</span>}
         </div>
 
         <div className="flex items-center gap-2 mb-3">

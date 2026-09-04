@@ -22,6 +22,16 @@ export function ProductDetailPage() {
   const [pincode, setPincode] = useState('');
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const [activeOffers, setActiveOffers] = useState([]);
+
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000/api';
+
+  useEffect(() => {
+    fetch(`${BACKEND_URL}/offers/active`)
+      .then(r => r.json())
+      .then(d => setActiveOffers(d.offers || []))
+      .catch(() => {});
+  }, []);
 
   const isWishlisted = product ? wishlistItems.includes(product.id) : false;
   const relatedProducts = product ? products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 10) : [];
@@ -98,8 +108,29 @@ export function ProductDetailPage() {
     }
   };
 
-  const originalPrice = selectedSizeObj ? Math.round(selectedSizeObj.price * 1.4) : 0;
-  const discountPercent = originalPrice > 0 ? Math.round(((originalPrice - selectedSizeObj.price) / originalPrice) * 100) : 0;
+  const originalPrice = Number(product?.mrp) || (selectedSizeObj ? Math.round(selectedSizeObj.price * 1.4) : 0);
+
+  // Find best matching auto-applied offer for this product
+  const matchingOffer = activeOffers
+    .filter(o => o.offer_type === 'offer' && o.is_active !== false)
+    .find(o => {
+      if (o.scope === 'all') return true;
+      if (o.scope === 'category') {
+        const cats = typeof o.category_ids === 'string' ? JSON.parse(o.category_ids) : (o.category_ids || []);
+        return cats.includes(product?.category);
+      }
+      if (o.scope === 'product') {
+        const pids = typeof o.product_ids === 'string' ? JSON.parse(o.product_ids) : (o.product_ids || []);
+        return pids.includes(product?.id?.toString()) || pids.includes(product?.id);
+      }
+      return false;
+    });
+
+  const offerDiscount = matchingOffer ? parseFloat(matchingOffer.discount_percent) : 0;
+  const effectivePrice = offerDiscount > 0
+    ? Math.round(selectedSizeObj.price * (1 - offerDiscount / 100))
+    : selectedSizeObj.price;
+  const discountPercent = originalPrice > 0 ? Math.round(((originalPrice - effectivePrice) / originalPrice) * 100) : 0;
 
   let customAttrs = {};
   try {
@@ -284,9 +315,9 @@ export function ProductDetailPage() {
           </div>
 
           {/* Price */}
-          <div className="flex items-end gap-3 mb-8">
-            <span className="text-3xl md:text-4xl font-black text-gray-900 tracking-tighter">₹{selectedSizeObj.price.toLocaleString()}</span>
-            {originalPrice > selectedSizeObj.price && (
+          <div className="flex items-end gap-3 mb-4">
+            <span className="text-3xl md:text-4xl font-black text-gray-900 tracking-tighter">₹{effectivePrice.toLocaleString()}</span>
+            {originalPrice > effectivePrice && (
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-base text-gray-400 line-through font-medium">₹{originalPrice.toLocaleString()}</span>
                 <span className="text-xs font-black text-white bg-gradient-to-r from-red-600 to-rose-500 px-2.5 py-1 rounded-full shadow-sm tracking-wide">
@@ -295,6 +326,18 @@ export function ProductDetailPage() {
               </div>
             )}
           </div>
+
+          {/* Offer badge */}
+          {matchingOffer && (
+            <div className="flex items-center gap-2 mb-6 bg-green-50 border border-green-200 rounded-xl px-4 py-2.5">
+              <span className="text-green-600 text-lg">🏷️</span>
+              <div>
+                <p className="text-green-700 font-bold text-sm">{matchingOffer.name || `${offerDiscount}% Off Applied`}</p>
+                <p className="text-green-600 text-xs">You save ₹{(selectedSizeObj.price - effectivePrice).toLocaleString()} with this offer</p>
+              </div>
+            </div>
+          )}
+
 
           {/* Colors */}
           {isHierarchical && parsedSizes.length > 0 && (

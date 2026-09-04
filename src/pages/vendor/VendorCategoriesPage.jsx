@@ -43,6 +43,7 @@ export function VendorCategoriesPage() {
   }, []);
 
   const isLocked = savedCategories.length > 0;
+  const limitReached = categoryLimit && selectedCategories.length >= categoryLimit;
 
   const handleToggleCategory = (categoryName) => {
     if (isLocked) return;
@@ -50,7 +51,7 @@ export function VendorCategoriesPage() {
     if (selectedCategories.includes(categoryName)) {
       setSelectedCategories(prev => prev.filter(c => c !== categoryName));
     } else {
-      if (categoryLimit && selectedCategories.length >= categoryLimit) {
+      if (limitReached) {
         toast.error(`You can only select up to ${categoryLimit} categories on your current plan.`);
         return;
       }

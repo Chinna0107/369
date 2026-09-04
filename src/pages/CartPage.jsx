@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingCart, Tag, X, CheckCircle2, AlertCircle, ArrowLeft } from 'lucide-react';
 import { Header } from '../components/Header';
 import { useCartStore } from '../store/useCartStore';
+import { useStoreData } from '../store/useStoreData';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -11,8 +12,9 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000/a
 export function CartPage() {
   const navigate = useNavigate();
   const { items, removeFromCart, updateQuantity, getSubtotal, getTotal, deliveryCharge } = useCartStore();
+  const { offers } = useStoreData();
   const [couponCode, setCouponCode] = useState('');
-  const [coupon, setCoupon] = useState(null);   // applied coupon object
+  const [coupon, setCoupon] = useState(null);
   const [couponError, setCouponError] = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
   
@@ -103,20 +105,40 @@ export function CartPage() {
 
   const handleRemoveCoupon = () => { setCoupon(null); setCouponCode(''); setCouponError(''); };
 
-  // Mockup-style calculations for discounts and original prices
-  const cartItemsWithDiscount = items.map((item, index) => {
-    const discounts = [50, 40, 20, 30];
-    const off = discounts[index % discounts.length];
-    const itemPrice = item.variant?.price || item.product.price;
-    const originalPrice = Math.round(itemPrice / (1 - off / 100));
-    return { ...item, originalPrice, off, itemPrice };
+  // Get matching offer for a product
+  const getMatchingOffer = (product) => {
+    return offers
+      .filter(o => o.offer_type === 'offer' && o.is_active !== false)
+      .find(o => {
+        if (o.scope === 'all') return true;
+        if (o.scope === 'category') {
+          const cats = typeof o.category_ids === 'string' ? JSON.parse(o.category_ids) : (o.category_ids || []);
+          return cats.includes(product?.category);
+        }
+        if (o.scope === 'product') {
+          const pids = typeof o.product_ids === 'string' ? JSON.parse(o.product_ids) : (o.product_ids || []);
+          return pids.includes(product?.id?.toString()) || pids.includes(product?.id);
+        }
+        return false;
+      });
+  };
+
+  // Build cart items with REAL MRP and offer discounts
+  const cartItemsWithDiscount = items.map((item) => {
+    const itemPrice = item.variant?.price || item.product?.price || 0;
+    const mrp = Number(item.product?.mrp) || Math.round(itemPrice * 1.4);
+    const matchingOffer = getMatchingOffer(item.product);
+    const offerPct = matchingOffer ? parseFloat(matchingOffer.discount_percent) : 0;
+    const effectivePrice = offerPct > 0 ? Math.round(itemPrice * (1 - offerPct / 100)) : itemPrice;
+    const off = mrp > effectivePrice ? Math.round(((mrp - effectivePrice) / mrp) * 100) : 0;
+    return { ...item, itemPrice: effectivePrice, originalPrice: mrp, off, offerPct };
   });
 
   const totalOriginalPrice = cartItemsWithDiscount.reduce((acc, curr) => acc + curr.originalPrice * curr.qty, 0);
   const totalItemPrice = cartItemsWithDiscount.reduce((acc, curr) => acc + curr.itemPrice * curr.qty, 0);
   const totalMockupDiscount = totalOriginalPrice - totalItemPrice;
   const delivery = totalItemPrice > 0 ? deliveryCharge : 0;
-  const finalAmount = totalItemPrice + delivery - discount; // includes the actual coupon discount if applied
+  const finalAmount = totalItemPrice + delivery - discount;
 
   return (
     <div ref={container} className="min-h-screen bg-gray-50 pb-24 font-sans">

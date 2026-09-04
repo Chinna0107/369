@@ -425,6 +425,45 @@ export function AdminOrdersPage() {
 
               {expanded === order.id && (
                 <div className="border-t border-brand-orange/5 p-3 sm:p-4 lg:p-5 space-y-4">
+
+                  {/* Customer Details */}
+                  {(() => {
+                    let address = {};
+                    try { address = typeof order.address === 'string' ? JSON.parse(order.address) : (order.address || {}); } catch(e) {}
+                    return (
+                      <div className="bg-gray-50 rounded-xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2 font-bold">Customer</p>
+                          <div className="space-y-1">
+                            <p className="text-sm font-semibold text-gray-900">{order.user_name || address.name || 'Guest'}</p>
+                            {order.user_email && <p className="text-xs text-gray-500">{order.user_email}</p>}
+                            {(order.user_phone || address.mobile) && (
+                              <a href={`tel:${order.user_phone || address.mobile}`} className="text-xs text-[#fe6603] font-medium hover:underline">
+                                📞 {order.user_phone || address.mobile}
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2 font-bold">Shipping Address</p>
+                          <div className="text-xs text-gray-700 leading-relaxed">
+                            {address.name && <p className="font-semibold">{address.name}</p>}
+                            {address.line1 && <p>{address.line1}{address.line2 ? `, ${address.line2}` : ''}</p>}
+                            {address.city && <p>{address.city}{address.state ? `, ${address.state}` : ''} — {address.pincode}</p>}
+                            {address.mobile && <p className="text-gray-500 mt-0.5">📱 {address.mobile}</p>}
+                          </div>
+                        </div>
+                        <div className="sm:col-span-2 flex items-center gap-3 pt-2 border-t border-gray-200">
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Payment:</span>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${ order.payment_method === 'cod' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700' }`}>
+                            {order.payment_method === 'cod' ? 'Cash on Delivery' : 'Prepaid / Online'}
+                          </span>
+                          <span className="text-xs text-gray-500 ml-auto">Total: <span className="font-bold text-gray-900">₹{order.total}</span></span>
+                        </div>
+                      </div>
+                    );
+                  })()}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2">Update Status</p>
