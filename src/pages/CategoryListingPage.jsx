@@ -155,47 +155,47 @@ export function CategoryListingPage() {
           <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4 lg:gap-5">
             <div 
               onClick={() => handleCategoryChange('all')}
-              className={`flex flex-col items-center gap-2.5 cursor-pointer group p-3 rounded-2xl transition-all duration-300 ${categoryId === 'all' ? 'bg-[#e5f5f1] shadow-inner' : 'bg-white shadow-sm border border-gray-100 hover:shadow-md hover:border-[#022A21]/20'}`}
+              className={`h-full flex flex-col items-center justify-start gap-2.5 cursor-pointer group p-3 rounded-[20px] transition-all duration-300 hover:-translate-y-1 ${categoryId === 'all' ? 'bg-gradient-to-b from-[#e5f5f1] to-white shadow-md border border-[#022A21]/20' : 'bg-white shadow-sm border border-gray-100 hover:shadow-md hover:border-[#022A21]/20'}`}
             >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-gray-50 border border-gray-100 overflow-hidden mb-1">
-                <span className={`text-xs md:text-sm font-extrabold text-center leading-tight ${categoryId === 'all' ? 'text-[#022A21]' : 'text-gray-600'}`}>All<br/>Items</span>
+              <div className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden mb-1 transition-all duration-300 ${categoryId === 'all' ? 'bg-[#022A21] shadow-lg shadow-[#022A21]/20 ring-2 ring-offset-2 ring-[#022A21]/20' : 'bg-gray-50 border border-gray-100 group-hover:border-gray-200 flex-shrink-0'}`}>
+                <span className={`text-xs md:text-sm font-extrabold text-center leading-tight ${categoryId === 'all' ? 'text-white' : 'text-gray-600'}`}>All<br/>Items</span>
               </div>
-              <span className={`text-[11px] sm:text-xs md:text-[13px] font-bold text-center leading-tight ${categoryId === 'all' ? 'text-[#022A21]' : 'text-gray-700'}`}>All Products</span>
+              <span className={`text-[11px] sm:text-xs md:text-[13px] font-bold text-center leading-tight line-clamp-2 w-full ${categoryId === 'all' ? 'text-[#022A21]' : 'text-gray-700'}`} title="All Products">All Products</span>
             </div>
             
             {categories.map(cat => (
               <div 
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id.toString())}
-                className={`flex flex-col items-center gap-2.5 cursor-pointer group p-3 rounded-2xl transition-all duration-300 ${categoryId === cat.id.toString() ? 'bg-[#e5f5f1] shadow-inner' : 'bg-white shadow-sm border border-gray-100 hover:shadow-md hover:border-[#022A21]/20'}`}
+                className={`h-full flex flex-col items-center justify-start gap-2.5 cursor-pointer group p-3 rounded-[20px] transition-all duration-300 hover:-translate-y-1 ${categoryId === cat.id.toString() ? 'bg-gradient-to-b from-[#e5f5f1] to-white shadow-md border border-[#022A21]/20' : 'bg-white shadow-sm border border-gray-100 hover:shadow-md hover:border-[#022A21]/20'}`}
               >
-                <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-gray-50 border border-gray-100 overflow-hidden mb-1 group-hover:scale-105 transition-transform duration-300">
+                <div className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden mb-1 group-hover:scale-105 transition-all duration-300 flex-shrink-0 ${categoryId === cat.id.toString() ? 'ring-2 ring-offset-2 ring-[#022A21]/40 shadow-lg' : 'bg-gray-50 border border-gray-100'}`}>
                   {cat.image_url ? (
                     <img src={cat.image_url} alt={cat.name} onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80'; }} className="w-full h-full object-cover" />
                   ) : (
                     <img src={imgAarti} alt="Cat" className="w-full h-full object-cover opacity-50 mix-blend-multiply" />
                   )}
                 </div>
-                <span className={`text-[11px] sm:text-xs md:text-[13px] font-bold text-center leading-tight ${categoryId === cat.id.toString() ? 'text-[#022A21]' : 'text-gray-700'}`}>
-                  {cat.name.split(' ').map((word, i) => <React.Fragment key={i}>{word}<br/></React.Fragment>)}
+                <span className={`text-[11px] sm:text-xs md:text-[13px] font-bold text-center leading-tight line-clamp-2 w-full px-1 ${categoryId === cat.id.toString() ? 'text-[#022A21]' : 'text-gray-700'}`} title={cat.name}>
+                  {cat.name}
                 </span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 bg-white p-3 md:p-4 rounded-2xl shadow-sm border border-gray-100 gap-4 sticky top-16 z-30">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 bg-white/90 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100/50 gap-4 sticky top-[70px] z-30 transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
           <div className="flex items-center gap-4">
             <h1 className="text-xl md:text-2xl font-black text-gray-900 font-serif leading-tight hidden md:block">{categoryName}</h1>
-            <span className="text-xs font-extrabold text-[#022A21] bg-[#e5f5f1] border border-[#022A21]/20 px-3 py-1.5 rounded-lg">{filteredProducts.length} Items</span>
+            <span className="text-xs font-extrabold text-[#022A21] bg-gradient-to-r from-[#e5f5f1] to-white border border-[#022A21]/20 px-3 py-1.5 rounded-full shadow-sm">{filteredProducts.length} Items</span>
           </div>
 
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setShowMobileFilters(true)}
-              className="flex items-center gap-2 text-sm font-bold text-gray-700 bg-gray-50 border border-gray-200 hover:bg-gray-100 px-4 py-2 rounded-xl transition-colors w-full sm:w-auto justify-center"
+              className="flex items-center gap-2 text-sm font-bold text-gray-800 bg-white border border-gray-200 hover:border-gray-300 hover:shadow-sm px-5 py-2.5 rounded-full transition-all duration-300 w-full sm:w-auto justify-center active:scale-95"
             >
-              <Filter className="w-4 h-4" />
+              <Filter className="w-4 h-4 text-[#022A21]" />
               Sort & Filter
             </button>
           </div>
@@ -223,31 +223,31 @@ export function CategoryListingPage() {
 
       {showMobileFilters && (
         <div className="fixed inset-0 z-[100] flex justify-end">
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onClick={() => setShowMobileFilters(false)} />
-          <div className="relative w-[85%] max-w-sm bg-white h-full flex flex-col shadow-2xl transition-transform border-l border-gray-200">
-            <div className="flex items-center justify-between p-5 border-b border-gray-100 bg-gray-50">
-              <h2 className="text-lg font-bold text-[#022A21] flex items-center gap-2">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300" onClick={() => setShowMobileFilters(false)} />
+          <div className="relative w-[85%] max-w-sm bg-white h-full flex flex-col shadow-[-10px_0_30px_rgba(0,0,0,0.1)] transition-transform duration-300 border-l border-gray-100 rounded-l-2xl overflow-hidden">
+            <div className="flex items-center justify-between p-5 md:p-6 border-b border-gray-100 bg-white/90 backdrop-blur-md">
+              <h2 className="text-lg md:text-xl font-extrabold text-[#022A21] flex items-center gap-2 font-serif">
                 <Filter className="w-5 h-5" /> Sort & Filter
               </h2>
-              <button onClick={() => setShowMobileFilters(false)} className="p-2 text-gray-500 hover:text-gray-900 bg-white hover:bg-gray-100 rounded-full transition-all border border-gray-200">
+              <button onClick={() => setShowMobileFilters(false)} className="p-2 text-gray-400 hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors active:scale-95">
                 <X className="w-5 h-5" />
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+            <div className="flex-1 overflow-y-auto p-5 md:p-6 custom-scrollbar bg-gray-50/30">
               <FilterContent />
             </div>
             
-            <div className="p-5 border-t border-gray-100 bg-gray-50 flex gap-3">
+            <div className="p-5 md:p-6 border-t border-gray-100 bg-white flex gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.02)]">
               <button 
                 onClick={() => { handleCategoryChange('all'); setSortBy('featured'); setShowMobileFilters(false); }}
-                className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 hover:bg-gray-100 font-bold rounded-xl transition-all bg-white text-sm"
+                className="flex-1 px-4 py-3.5 border-2 border-gray-200 text-gray-700 hover:bg-gray-50 font-bold rounded-2xl transition-all bg-white text-sm active:scale-95"
               >
                 Clear
               </button>
               <button 
                 onClick={() => setShowMobileFilters(false)}
-                className="flex-[2] px-4 py-3 bg-[#022A21] text-white font-bold rounded-xl shadow-md hover:bg-black text-sm transition-colors"
+                className="flex-[2] px-4 py-3.5 bg-[#022A21] text-white font-bold rounded-2xl shadow-[0_8px_20px_rgba(2,42,33,0.25)] hover:bg-black text-sm transition-all hover:-translate-y-0.5 active:scale-95"
               >
                 Apply
               </button>
