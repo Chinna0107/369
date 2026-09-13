@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package, Heart, MapPin, Wallet, Tag, Bell, Settings, LogOut, ChevronRight, User } from 'lucide-react';
+import { Package, Heart, MapPin, Tag, Bell, Settings, LogOut, ChevronRight, User } from 'lucide-react';
 import { Header } from '../components/Header';
 import { useAuthStore } from '../store/useAuthStore';
 

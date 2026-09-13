@@ -255,26 +255,20 @@ export function ProductCard({ product, layout = 'grid' }) {
 
       {/* Info */}
       <div className="flex flex-col flex-grow px-3 pt-4 md:px-5">
-        <p className="text-gray-400 text-[10px] md:text-[11px] font-semibold tracking-widest uppercase mb-1.5">
-          {product.brand || product.category || 'ULMGH369'}
+        <p className="text-gray-400 text-[10px] md:text-[11px] font-semibold tracking-widest uppercase mb-1.5 truncate">
+          {product.short_description || product.brand || product.category || 'ULMGH369'}
         </p>
 
-        <h3 className="text-[15px] md:text-[17px] font-bold text-gray-900 line-clamp-2 leading-snug mb-3 group-hover:text-brand-orange transition-colors">
+        <h3 className="text-[15px] md:text-[17px] font-bold text-gray-900 truncate mb-3 group-hover:text-brand-orange transition-colors">
           {product.name}
         </h3>
 
-        <div className="flex items-end gap-2.5 mb-3">
+        <div className="flex items-end gap-2.5 mb-4">
           <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">₹{effectivePrice?.toLocaleString('en-IN')}</span>
           {originalPrice > effectivePrice && <span className="text-xs md:text-sm text-gray-400 line-through mb-1 font-medium">₹{originalPrice?.toLocaleString('en-IN')}</span>}
         </div>
 
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-[#3EA361] text-[10px] md:text-[11px] font-medium">₹100 wallet cash</span>
-          <span className="text-[#9061DF] text-[10px] md:text-[11px] font-medium">+50 pts</span>
-        </div>
-
         <div className="mt-auto pt-2 pb-1">
-          <p className="text-gray-500 text-[11px] md:text-xs mb-2">4-day replacements</p>
           <div className="flex gap-2">
             <button 
               onClick={handleAddToCart} 

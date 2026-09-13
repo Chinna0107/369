@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Gift, Copy, Share2, CheckCircle2, Users, Wallet } from 'lucide-react';
+import { Gift, Copy, Share2, CheckCircle2, Users } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export function ReferPage() {
@@ -26,7 +26,7 @@ export function ReferPage() {
   const steps = [
     { title: "Share Code", desc: "Share your unique link or code with friends.", icon: Share2 },
     { title: "Friend Signs Up", desc: "They get a special discount on their first order.", icon: Users },
-    { title: "Your Earnings ", desc: "Once they complete their order, you get money in your wallet.", icon: Wallet },
+    { title: "Your Earnings ", desc: "Once they complete their order, you get rewards.", icon: Gift },
   ];
 
   return (

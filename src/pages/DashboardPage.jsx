@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Package, Heart, MapPin, Wallet, Tag, Bell, Settings,
+  Package, Heart, MapPin, Tag, Bell, Settings,
   LogOut, ChevronRight, User, Plus, Trash2, Edit2, X, Check
 } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';

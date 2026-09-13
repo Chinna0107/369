@@ -45,17 +45,6 @@ export function BottomNav() {
       )
     },
     {
-      name: 'Wallet',
-      path: '/wallet',
-      active: isActive(['/wallet']),
-      icon: (active) => (
-        <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke={active ? '#fff' : INACTIVE} strokeWidth="2">
-          <path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5z" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M16 12h5M16 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      )
-    },
-    {
       name: 'Wishlist',
       path: '/wishlist',
       active: isActive(['/wishlist']),

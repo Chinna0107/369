@@ -16,10 +16,12 @@ import imgAarti from '../assets/story_aarti.png';
 const AnimatedBannerCarousel = () => {
   const scrollRef = React.useRef(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const allBanners = useStoreData(state => state.banners) || [];
+  const storeBanners = React.useMemo(() => allBanners.filter(b => b.is_active), [allBanners]);
   
-  const banners = [
+  const fallbackBanners = [
     {
-      id: 1,
+      id: 'f1',
       bg: 'bg-gradient-to-r from-[#991b54] to-[#c81e51]',
       logo: 'boAt',
       title: 'This Rakhi,\nGift Great Audio.',
@@ -28,7 +30,7 @@ const AnimatedBannerCarousel = () => {
       tag: 'INDIA\'S #1 AUDIO BRAND'
     },
     {
-      id: 2,
+      id: 'f2',
       bg: 'bg-gradient-to-r from-blue-800 to-blue-600',
       logo: 'SAMSUNG',
       title: 'Galaxy Days\nAre Here.',
@@ -37,38 +39,22 @@ const AnimatedBannerCarousel = () => {
       tag: 'TOP RATED SMARTPHONES'
     },
     {
-      id: 3,
+      id: 'f3',
       bg: 'bg-gradient-to-r from-green-800 to-green-600',
       logo: 'LAKMÉ',
       title: 'Glow Like\nNever Before.',
       subtitle: 'Min 40% Off',
       image: 'https://images.unsplash.com/photo-1596462502278-27bf85033e5a?w=500&q=80',
       tag: 'BEAUTY ESSENTIALS'
-    },
-    {
-      id: 4,
-      bg: 'bg-gradient-to-r from-[#312e81] to-[#4f46e5]',
-      logo: 'PUMA',
-      title: 'Step Up\nYour Game.',
-      subtitle: 'Under ₹1999',
-      image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500&q=80',
-      tag: 'PREMIUM FOOTWEAR'
-    },
-    {
-      id: 5,
-      bg: 'bg-gradient-to-r from-orange-700 to-orange-500',
-      logo: 'SONY',
-      title: 'Immersive\nExperience.',
-      subtitle: 'New Launches',
-      image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80',
-      tag: 'BEST IN CLASS'
     }
   ];
+
+  const displayBanners = storeBanners.length > 0 ? storeBanners : fallbackBanners;
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => {
-        const next = (current + 1) % banners.length;
+        const next = (current + 1) % displayBanners.length;
         if (scrollRef.current) {
           const slideWidth = scrollRef.current.clientWidth;
           scrollRef.current.scrollTo({
@@ -80,7 +66,7 @@ const AnimatedBannerCarousel = () => {
       });
     }, 4000);
     return () => clearInterval(interval);
-  }, [banners.length]);
+  }, [displayBanners.length]);
 
   const handleScroll = (e) => {
     const scrollLeft = e.target.scrollLeft;
@@ -88,6 +74,16 @@ const AnimatedBannerCarousel = () => {
     const newIndex = Math.round(scrollLeft / slideWidth);
     if (newIndex !== activeIndex) {
       setActiveIndex(newIndex);
+    }
+  };
+
+  const handleBannerClick = (banner) => {
+    if (banner.link_url) {
+      if (banner.link_url.startsWith('http')) {
+        window.open(banner.link_url, '_blank');
+      } else {
+        window.location.href = banner.link_url;
+      }
     }
   };
 
@@ -99,8 +95,15 @@ const AnimatedBannerCarousel = () => {
         className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full rounded-2xl shadow-md border border-gray-100 bg-white"
         style={{ scrollBehavior: 'smooth' }}
       >
-        {banners.map((banner, idx) => (
-          <div key={banner.id} className="w-full shrink-0 snap-center relative">
+        {displayBanners.map((banner, idx) => {
+          const isCustom = !!banner.image_url;
+          return (
+          <div key={banner.id || idx} onClick={() => handleBannerClick(banner)} className={`w-full shrink-0 snap-center relative ${banner.link_url ? 'cursor-pointer' : ''}`}>
+            {isCustom ? (
+               <div className="w-full h-[190px] md:h-[220px] relative overflow-hidden bg-gray-50 flex items-center justify-center">
+                 <img src={banner.image_url} alt={banner.title || 'Banner'} className="w-full h-full object-cover" />
+               </div>
+            ) : (
             <div className={`w-full h-[190px] md:h-[220px] ${banner.bg} p-5 flex items-center relative overflow-hidden`}>
               
               {/* Background Glow */}
@@ -133,13 +136,14 @@ const AnimatedBannerCarousel = () => {
               
               <div className="absolute bottom-2 right-2 bg-black/40 backdrop-blur-sm text-white/80 text-[8px] px-1.5 py-0.5 rounded font-bold">AD</div>
             </div>
+            )}
           </div>
-        ))}
+        )})}
       </div>
       
       {/* Pagination Dots */}
       <div className="flex items-center justify-center gap-1.5 mt-3 w-full">
-        {banners.map((_, idx) => (
+        {displayBanners.map((_, idx) => (
           <div 
             key={idx} 
             className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeIndex ? 'w-4 bg-gray-400' : 'w-1.5 bg-gray-200'}`}
@@ -286,48 +290,9 @@ export function HomePage() {
       <Header variant="home" />
 
       <div className="max-w-lg mx-auto md:max-w-6xl w-full">
-        {/* 1. Hero Banner: Big Saving Days */}
-        <div className="animate-section px-3 mt-8 md:px-4 md:mt-20">
-          <div className="bg-[#122e5a] rounded-2xl p-4 sm:p-6 text-white relative overflow-hidden flex shadow-sm min-h-[160px]">
-            <div className="z-10 w-[55%] flex flex-col justify-center">
-              <span className="bg-[#fcd34d] text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-2 uppercase tracking-wide">Best Deals</span>
-              <h2 className="text-[26px] sm:text-3xl font-extrabold leading-tight mb-2 tracking-tight">
-                Big Saving<br />Days
-              </h2>
-              <p className="text-white/80 text-[11px] sm:text-sm mb-4 leading-tight">
-                Grab Best Deals<br />On Top Brands
-              </p>
-              <button className="bg-white text-gray-900 text-[11px] font-bold py-2 px-3 rounded-md self-start flex items-center gap-1 hover:bg-gray-100 shadow-sm transition-transform active:scale-95">
-                Shop Now <span className="text-sm font-black leading-none">→</span>
-              </button>
-            </div>
-            <div className="absolute right-0 top-0 bottom-0 w-[55%] bg-gradient-to-l from-white/10 to-transparent"></div>
-            {/* Dummy image representation with devices */}
-            <div className="w-[45%] flex items-center justify-end z-10 relative pr-2">
-              <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
-                <div className="w-[70px] h-[90px] bg-[#3b82f6] border-2 border-gray-800 rounded-xl relative z-10 shadow-lg translate-x-2 -translate-y-1">
-                  <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
-                  <div className="absolute top-5 right-2 w-2 h-2 rounded-full bg-gray-800"></div>
-                </div>
-                <div className="w-[45px] h-[55px] bg-gray-900 rounded-lg absolute bottom-2 right-12 z-20 shadow-lg border border-gray-700 flex flex-col items-center justify-center">
-                  <div className="text-[8px] text-white">10:09</div>
-                  <div className="w-4 h-4 rounded bg-[#ef4444] mt-1 grid grid-cols-2 gap-0.5 p-0.5">
-                    <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
-                    <div className="bg-white/50 rounded-full"></div><div className="bg-white/50 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Carousel dots */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
-              <div className="w-2 h-2 rounded-full bg-white"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-            </div>
-          </div>
+        {/* 1. Hero Banner: Dynamic Banners */}
+        <div className="animate-section px-3 mt-4 md:px-4 md:mt-20">
+          <AnimatedBannerCarousel />
         </div>
 
         {/* 2. Categories Grid */}
@@ -464,10 +429,10 @@ export function HomePage() {
                          {off}%
                       </div>
                       
-                      <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative p-3 flex items-center justify-center border-b border-gray-50">
+                      <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative flex items-center justify-center border-b border-gray-100 overflow-hidden">
                          <img src={p.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={p.name} 
                               onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
-                              className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-110 transition-transform duration-500" />
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                          
                          {/* Add Button */}
                          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${p.id}`); }} className="absolute -bottom-4 right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-xl flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
@@ -601,8 +566,8 @@ export function HomePage() {
                              {discount}%
                           </div>
                           
-                          <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative p-3 flex items-center justify-center border-b border-gray-50">
-                             <img src={product.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={product.name} className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-110 transition-transform duration-500" />
+                          <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative flex items-center justify-center border-b border-gray-100 overflow-hidden">
+                             <img src={product.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                              
                              {/* Add Button */}
                              <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${product.id}`); }} className="absolute -bottom-4 right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-xl flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
@@ -638,8 +603,7 @@ export function HomePage() {
             </div>
           )}
 
-          {/* Animated Banner Carousel */}
-          <AnimatedBannerCarousel />
+
 
           {/* Trending (Orange Theme) */}
           {products.filter(p => p.is_trending).length > 0 && (
@@ -699,8 +663,8 @@ export function HomePage() {
                              {discount}%
                           </div>
                           
-                          <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative p-3 flex items-center justify-center border-b border-gray-50">
-                             <img src={product.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={product.name} className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-110 transition-transform duration-500" />
+                          <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative flex items-center justify-center border-b border-gray-100 overflow-hidden">
+                             <img src={product.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                              
                              {/* Add Button */}
                              <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${product.id}`); }} className="absolute -bottom-4 right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-xl flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">

@@ -206,7 +206,7 @@ export function SignupPage() {
                       type="text" inputMode="numeric" maxLength={1} value={digit}
                       onChange={(e) => handleOtpChange(e.target.value, idx)}
                       onKeyDown={(e) => handleOtpKeyDown(e, idx)}
-                      className={`flex-1 h-14 text-center text-xl font-extrabold rounded-2xl border-2 focus:outline-none transition-all
+                      className={`w-0 min-w-0 flex-1 h-14 text-center text-xl font-extrabold rounded-2xl border-2 focus:outline-none transition-all
                         ${digit ? 'border-brand-orange text-brand-orange shadow-[0_0_0_4px_rgba(254,102,3,0.12)]' : 'border-gray-200 bg-gray-50 text-[#022A21] focus:border-[#022A21] focus:bg-white focus:shadow-[0_0_0_4px_rgba(2,42,33,0.08)]'}`}
                       style={digit ? { background: 'rgba(254,102,3,0.06)' } : {}}
                     />

@@ -31,23 +31,27 @@ export const useStoreData = create((set) => ({
   products: [],
   categories: [],
   offers: [],
+  banners: [],
   loading: true,
   fetchData: async () => {
     try {
       set({ loading: true });
-      const [prodRes, catRes, offerRes] = await Promise.all([
+      const [prodRes, catRes, offerRes, bannerRes] = await Promise.all([
         fetch(`${BACKEND_URL}/general/products`),
         fetch(`${BACKEND_URL}/general/categories`),
         fetch(`${BACKEND_URL}/offers/active`).catch(() => null),
+        fetch(`${BACKEND_URL}/general/banners`).catch(() => null),
       ]);
       const prodData = await prodRes.json();
       const catData = await catRes.json();
       const offerData = offerRes ? await offerRes.json() : {};
+      const bannerData = bannerRes ? await bannerRes.json() : {};
       
       set({ 
         products: prodData.products || [], 
         categories: catData.categories || [],
         offers: offerData.offers || [],
+        banners: bannerData.banners || [],
         loading: false 
       });
     } catch (err) {
@@ -56,6 +60,7 @@ export const useStoreData = create((set) => ({
         products: MOCK_PRODUCTS, 
         categories: MOCK_CATEGORIES,
         offers: [],
+        banners: [],
         loading: false 
       });
     }
