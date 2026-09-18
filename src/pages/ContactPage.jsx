@@ -97,8 +97,10 @@ export function ContactPage() {
                   <div>
                     <p className="text-sm font-bold text-[#022A21] mb-1">Corporate Office</p>
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      1-1-738, Vinayaka temple road,<br/>
-                      Koratla, Telangana, India
+                      D.No.70-126-G-3-6-1,<br/>
+                      Near Beearappa Swamy Temple,<br/>
+                      Kallur, Kurnool – 018003<br/>
+                      Andhra Pradesh - India
                     </p>
                   </div>
                 </div>

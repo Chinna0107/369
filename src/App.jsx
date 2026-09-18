@@ -33,6 +33,7 @@ import { CouponsPage } from './pages/CouponsPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { ReferPage } from './pages/ReferPage';
+import { MeditationPage } from './pages/MeditationPage';
 
 import { AdminLayout } from './components/admin/AdminLayout';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
@@ -66,6 +67,7 @@ import { VendorLayout } from './components/vendor/VendorLayout';
 import { VendorLoginPage } from './pages/vendor/VendorLoginPage';
 import { VendorSignupPage } from './pages/vendor/VendorSignupPage';
 import { VendorDashboardPage } from './pages/vendor/VendorDashboardPage';
+import { VendorGuidelinesPage } from './pages/vendor/VendorGuidelinesPage';
 import { VendorProductsPage } from './pages/vendor/VendorProductsPage';
 import { VendorOrdersPage } from './pages/vendor/VendorOrdersPage';
 import { VendorCategoriesPage } from './pages/vendor/VendorCategoriesPage';
@@ -105,12 +107,17 @@ function AnimatedAppRoutes() {
         <Route path="/offers" element={<PageTransition><OffersPage /></PageTransition>} />
         <Route path="/all-coupons" element={<PageTransition><CouponsPage /></PageTransition>} />
         <Route path="/refer" element={<PageTransition><ReferPage /></PageTransition>} />
+        <Route path="/meditation" element={<PageTransition><MeditationPage /></PageTransition>} />
         <Route path="/collection/:type" element={<PageTransition><CollectionPage /></PageTransition>} />
         <Route path="/category/:categoryId" element={<PageTransition><CategoryListingPage /></PageTransition>} />
         <Route path="/product/:id" element={<PageTransition><ProductDetailPage /></PageTransition>} />
         <Route path="/cart" element={<PageTransition><CartPage /></PageTransition>} />
         <Route path="/checkout" element={<PageTransition><CheckoutPage /></PageTransition>} />
         <Route path="/order-tracking/:orderId" element={<PageTransition><OrderTrackingPage /></PageTransition>} />
+        <Route path="/vendor-login" element={<PageTransition><VendorLoginPage /></PageTransition>} />
+        <Route path="/vendor-signup" element={<PageTransition><VendorSignupPage /></PageTransition>} />
+        <Route path="/vendor-guidelines" element={<PageTransition><VendorGuidelinesPage /></PageTransition>} />
+        <Route path="/vendor/dashboard/*" element={<PageTransition><VendorDashboardPage /></PageTransition>} />
         <Route path="/wishlist" element={<PageTransition><WishlistPage /></PageTransition>} />
         <Route path="/profile" element={<PageTransition><ProfilePage /></PageTransition>} />
         <Route path="/dashboard" element={<PageTransition><DashboardPage /></PageTransition>} />

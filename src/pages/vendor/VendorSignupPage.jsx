@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Phone, Store, ArrowRight, ShieldCheck, CheckCircle2, CreditCard } from 'lucide-react';
+import { Mail, Lock, User, Phone, Store, ArrowRight, ShieldCheck, CheckCircle2, CreditCard, PlayCircle, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import logo from '../../assets/logo.png';
 
@@ -18,6 +19,8 @@ export function VendorSignupPage() {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [paymentDone, setPaymentDone] = useState(false);
   const [paymentId, setPaymentId] = useState('');
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [acceptedGuidelines, setAcceptedGuidelines] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', email: '', phone: '',
@@ -81,6 +84,7 @@ export function VendorSignupPage() {
     if (step === 2) return setStep(3);
 
     if (step === 3) {
+      if (!acceptedGuidelines) return setError('You must accept the Vendor Guidelines to continue.');
       if (!paymentDone) return setError('Please complete payment to continue');
       // Submit signup + send OTP
       setLoading(true);
@@ -136,7 +140,13 @@ export function VendorSignupPage() {
             <Store className="w-6 h-6 text-[#fe6603]" />
             <h1 className="text-3xl font-bold text-gray-900">Become a Vendor</h1>
           </div>
-          <p className="text-gray-500">Apply to sell your products on ULMGH369</p>
+          <p className="text-gray-500 mb-4">Apply to sell your products on ULMGH369</p>
+          <button 
+            onClick={() => setShowVideoModal(true)}
+            className="inline-flex items-center gap-2 bg-[#fe6603]/10 hover:bg-[#fe6603]/20 text-[#fe6603] font-semibold px-4 py-2 rounded-full transition-colors text-sm"
+          >
+            <PlayCircle className="w-4 h-4" /> Watch Onboarding Demo
+          </button>
         </div>
 
         <div className="bg-white rounded-[32px] p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative overflow-hidden">
@@ -291,6 +301,15 @@ export function VendorSignupPage() {
                   </button>
                 )}
 
+                <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 mt-4">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" checked={acceptedGuidelines} onChange={(e) => setAcceptedGuidelines(e.target.checked)} className="mt-1 w-5 h-5 rounded border-gray-300 text-[#fe6603] focus:ring-[#fe6603]" />
+                    <span className="text-sm text-gray-600">
+                      I have read, understood, and agree to comply with the <Link to="/vendor-guidelines" target="_blank" className="text-[#fe6603] font-bold hover:underline">ULMGH-369 Vendor Registration & Operational Guidelines</Link>.
+                    </span>
+                  </label>
+                </div>
+
                 {paymentDone && (
                   <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
                     <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
@@ -347,6 +366,45 @@ export function VendorSignupPage() {
           </div>
         </div>
       </div>
+
+      {/* Video Modal Placeholder */}
+      <AnimatePresence>
+        {showVideoModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+            onClick={() => setShowVideoModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-3xl rounded-3xl p-2 relative shadow-2xl overflow-hidden"
+              onClick={e => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setShowVideoModal(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 bg-white/50 p-2 rounded-full backdrop-blur-md z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="aspect-video bg-gray-900 rounded-2xl flex flex-col items-center justify-center text-center p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+                <div className="w-20 h-20 rounded-full bg-[#fe6603]/20 animate-pulse flex items-center justify-center mb-6 relative z-10 cursor-pointer">
+                  <PlayCircle className="w-10 h-10 text-[#fe6603] ml-1" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2 relative z-10">Vendor Onboarding Guide</h3>
+                <p className="text-gray-400 max-w-md relative z-10">
+                  The instructional video covering registration, business details, KYC, and dashboard navigation will be placed here once produced.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

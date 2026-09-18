@@ -13,8 +13,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-16 pb-12 border-b border-[#054335] relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-[#033429] p-8 md:p-10 rounded-3xl border border-[#065A46] shadow-xl">
           <div className="max-w-xl text-center md:text-left">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: 'Georgia, serif' }}>Join the ULMGH369 VIP Club</h3>
-            <p className="text-gray-300 text-sm md:text-base">Subscribe to get exclusive access to premium collections, special offers, and styling tips directly to your inbox.</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: 'Georgia, serif' }}>Join the ULMGH-369 Community</h3>
+            <p className="text-gray-300 text-sm md:text-base">Subscribe to receive exclusive offers, new product updates, special opportunities, and inspiring stories from businesses across our growing marketplace.</p>
           </div>
           <div className="w-full md:w-auto flex-1 max-w-md flex items-center gap-2 relative">
             <input 
@@ -37,12 +37,13 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <img src={logoUrl} alt="ULMGH369" className="w-16 md:w-20 object-contain filter drop-shadow-sm" />
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-serif" style={{ fontFamily: 'Georgia, serif' }}>
-                ULMGH369
+                ULMGH-369
               </h2>
             </div>
             <p className="text-[14px] text-gray-300 leading-relaxed pr-4">
-              Your ultimate online shopping destination for premium ethnic wear and modern fashion. Experience quality and luxury delivered to your doorstep.
+              Your trusted online marketplace connecting local entrepreneurs, farmers, artisans, weavers, manufacturers, and businesses with customers across India and beyond. Discover genuine products, quality, convenience, and trusted service — all in one platform.
             </p>
+            <div className="text-brand-orange font-bold text-sm uppercase tracking-wider mt-2 mb-2">Local to Global</div>
             <div className="flex items-center gap-3 mt-2">
               <a href="#" className="w-10 h-10 rounded-full bg-[#054335] border border-brand-orange/30 flex items-center justify-center text-brand-orange hover:bg-brand-orange hover:text-white transition-all hover:-translate-y-1 shadow-[0_4px_10px_rgba(255,153,0,0.1)]">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
@@ -68,9 +69,9 @@ export function Footer() {
             {[
               { name: 'Home', path: '/' },
               { name: 'Shop All', path: '/category/all' },
+              { name: 'Heartfulness Meditation', path: '/meditation' },
               { name: 'My Account', path: '/profile' },
-              { name: 'Order Tracking', path: '/my-orders' },
-              { name: 'Festive Collection', path: '/category/all' }
+              { name: 'Order Tracking', path: '/my-orders' }
             ].map(link => (
               <Link key={link.name} to={link.path} className="group flex items-center text-[14px] text-gray-300 hover:text-brand-orange transition-colors w-fit">
                 <ChevronRight className="w-4 h-4 mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-orange" />
@@ -90,7 +91,8 @@ export function Footer() {
               { name: 'About Us', path: '/about' },
               { name: 'Shipping Policy', path: '/shipping-policy' },
               { name: 'Replacements & Exchanges', path: '/returns-policy' },
-              { name: 'FAQs', path: '/faqs' }
+              { name: 'FAQs', path: '/faqs' },
+              { name: 'Vendor Guidelines', path: '/vendor-guidelines' }
             ].map(link => (
               <Link key={link.name} to={link.path} className="group flex items-center text-[14px] text-gray-300 hover:text-brand-orange transition-colors w-fit">
                 <ChevronRight className="w-4 h-4 mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-orange" />
@@ -109,7 +111,7 @@ export function Footer() {
               <div className="w-9 h-9 rounded-full bg-[#054335] border border-brand-orange/20 flex items-center justify-center shrink-0 group-hover:bg-brand-orange group-hover:border-brand-orange transition-all text-brand-orange group-hover:text-white">
                 <MapPin className="w-4 h-4" />
               </div>
-              <span className="leading-relaxed mt-1 group-hover:text-white transition-colors">1-1-738, Vinayaka temple road,<br/>Koratla, Telangana, India<br/><span className="text-[11px] text-brand-orange/70 font-medium tracking-wider">GSTIN: 36BANPK1643M1ZC</span></span>
+              <span className="leading-relaxed mt-1 group-hover:text-white transition-colors">D.No.70-126-G-3-6-1,<br/>Near Beearappa Swamy Temple,<br/>Kallur, Kurnool – 018003<br/>Andhra Pradesh - India<br/><span className="text-[11px] text-brand-orange/70 font-medium tracking-wider"></span></span>
             </div>
             <div className="flex items-center gap-3 text-[14px] text-gray-300 group cursor-default">
               <div className="w-9 h-9 rounded-full bg-[#054335] border border-brand-orange/20 flex items-center justify-center shrink-0 group-hover:bg-brand-orange group-hover:border-brand-orange transition-all text-brand-orange group-hover:text-white">
@@ -129,7 +131,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-[#054335] flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[14px] text-gray-400 font-medium tracking-wide">
-            &copy; {new Date().getFullYear()} ULMGH369. All rights reserved.
+            &copy; {new Date().getFullYear()} ULMGH-369. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="text-[14px] text-gray-400 hover:text-brand-orange transition-colors font-medium">Privacy Policy</Link>

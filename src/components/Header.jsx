@@ -164,29 +164,33 @@ function DesktopFullHeader({ cartCount, wishlistCount, token, user, handleLogout
         <div className="w-full max-w-[1600px] mx-auto flex items-center justify-between gap-4">
 
           {/* Navigation Links */}
-          <nav className="flex-1 hidden lg:flex items-center justify-start gap-8">
-            <Link to="/" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group">
+          <nav className="flex-1 hidden lg:flex items-center justify-start gap-4 xl:gap-6">
+            <Link to="/" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group whitespace-nowrap">
               Home
               <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
             <CategoriesDropdown />
             <OffersDropdown />
-            <Link to="/about" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group">
+            <Link to="/about" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group whitespace-nowrap">
               About
               <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
-            <Link to="/contact" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group">
+            <Link to="/meditation" className="text-[14px] lg:text-[15px] font-bold text-teal-700 hover:text-teal-500 transition-all relative group whitespace-nowrap">
+              Well-being
+              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-teal-500 group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+            </Link>
+            <Link to="/contact" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group whitespace-nowrap">
               Contact
               <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
-            <Link to="/my-orders" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group">
+            <Link to="/my-orders" className="text-[14px] lg:text-[15px] font-bold text-gray-900 hover:text-brand-orange transition-all relative group whitespace-nowrap">
               Orders
               <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
           </nav>
 
           {/* Centered Logo */}
-          <Link to="/" className="shrink-0 flex items-center justify-center mx-4 group lg:mx-0 relative -ml-2 md:-ml-8 lg:-ml-16">
+          <Link to="/" className="shrink-0 flex items-center justify-center mx-4 group lg:mx-0 relative">
             <img src={logo} alt="Logo" className="relative z-10 h-20 md:h-28 lg:h-32 w-auto max-w-[320px] lg:max-w-[400px] object-contain transition-all duration-500 group-hover:scale-105 filter drop-shadow-md" />
           </Link>
 
@@ -379,6 +383,7 @@ export function Header({ variant = 'default', title, showShare = false, hideSear
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Offers', path: '/offers' },
+    { name: 'Meditation & Well-being', path: '/meditation' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact Us', path: '/contact' },
     { name: 'My Orders', path: '/my-orders' },
