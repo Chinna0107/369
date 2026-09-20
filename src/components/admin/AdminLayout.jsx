@@ -24,6 +24,7 @@ const NAV = [
   { href: "/admin/offers", label: "Offers", icon: <Percent className="w-4 h-4" /> },
   { href: "/admin/advertisements", label: "Advertisements", icon: <Megaphone className="w-4 h-4" /> },
   { href: "/admin/product-requests", label: "Product Requests", icon: <ClipboardList className="w-4 h-4" /> },
+  { href: "/admin/faqs", label: "FAQs & Support", icon: <HeadphonesIcon className="w-4 h-4" /> },
 ];
 
 export function AdminLayout({ children }) {

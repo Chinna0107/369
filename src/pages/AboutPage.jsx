@@ -68,10 +68,10 @@ export function AboutPage() {
             className="space-y-6"
           >
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#022A21] leading-tight font-serif">
-              Not Just Another E-commerce Website.
+              Not Just another E-Commerce Website.
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Our vision is to build a trusted digital ecosystem where local entrepreneurs, artisans, farmers, manufacturers, and businesses can showcase authentic products and reach customers beyond geographical boundaries. Customers should be able to discover authentic products, trusted sellers, and competitive prices through a convenient and reliable digital platform.
+              ULMGH-369 is envisioned as more than an e-commerce platform. Our vision is to build a trusted digital ecosystem where local entrepreneurs, artisans, farmers, manufacturers, and businesses can showcase authentic products and reach customers beyond geographical boundaries. Customers should be able to discover authentic products, trusted sellers, and competitive prices through a convenient and reliable digital platform.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed font-semibold text-[#022A21]">
               Every local product has a story. Every entrepreneur has potential. Every community deserves access to a trusted digital marketplace.

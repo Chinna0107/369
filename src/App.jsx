@@ -55,6 +55,7 @@ import { AdminSubscriptionsPage } from './pages/admin/AdminSubscriptionsPage';
 import { AdminOffersPage } from './pages/admin/AdminOffersPage';
 import { AdminAdvertisementsPage } from './pages/admin/AdminAdvertisementsPage';
 import { AdminProductRequestsPage } from './pages/admin/AdminProductRequestsPage';
+import { AdminFAQsPage } from './pages/admin/AdminFAQsPage';
 
 import { SupportLayout } from './components/support/SupportLayout';
 import { SupportLoginPage } from './pages/support/SupportLoginPage';
@@ -100,9 +101,9 @@ function AnimatedAppRoutes() {
         <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
         <Route path="/shipping-policy" element={<PageTransition><ShippingPolicyPage /></PageTransition>} />
         <Route path="/returns-policy" element={<PageTransition><ReturnsPolicyPage /></PageTransition>} />
+        <Route path="/faqs" element={<PageTransition><FAQPage /></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicyPage /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><TermsPage /></PageTransition>} />
-        <Route path="/faqs" element={<PageTransition><FAQPage /></PageTransition>} />
         <Route path="/search" element={<PageTransition><SearchPage /></PageTransition>} />
         <Route path="/offers" element={<PageTransition><OffersPage /></PageTransition>} />
         <Route path="/all-coupons" element={<PageTransition><CouponsPage /></PageTransition>} />
@@ -174,6 +175,7 @@ function App() {
                   <Route path="offers" element={<AdminOffersPage />} />
                   <Route path="advertisements" element={<AdminAdvertisementsPage />} />
                   <Route path="product-requests" element={<AdminProductRequestsPage />} />
+                  <Route path="faqs" element={<AdminFAQsPage />} />
                 </Routes>
               </AdminLayout>
             } />

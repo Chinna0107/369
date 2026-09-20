@@ -83,6 +83,9 @@ export function AdminProductFormPage() {
     pickup_location: '', warehouse: '', available_cities: '',
     manufacturer_name: '', country_of_origin: '', hsn_code: '',
     gst_number: '', contact_number: '', whatsapp_number: '', vendor_email: '',
+    return_eligible: true, exchange_available: true, replacement_only: false,
+    return_shipping_applicable: false, seller_approval_required: false,
+    return_window: '7', return_instructions: '',
     // Admin controls
     is_active: true, is_bestseller: false, is_trending: false, is_offer: false, status: 'approved',
     custom_attributes: {},
@@ -139,6 +142,13 @@ export function AdminProductFormPage() {
         seo_keywords: attrs.seo_keywords || '',
         meta_description: attrs.meta_description || '',
         refund_available: attrs.refund_available || false,
+        return_eligible: attrs.return_eligible ?? true,
+        exchange_available: attrs.exchange_available ?? true,
+        replacement_only: attrs.replacement_only || false,
+        return_shipping_applicable: attrs.return_shipping_applicable || false,
+        seller_approval_required: attrs.seller_approval_required || false,
+        return_window: attrs.return_window || '7',
+        return_instructions: attrs.return_instructions || '',
         shipping_weight: attrs.shipping_weight || '',
         custom_attributes: attrs,
       }));
@@ -230,6 +240,10 @@ export function AdminProductFormPage() {
         condition: form.condition, seo_title: form.seo_title,
         seo_keywords: form.seo_keywords, meta_description: form.meta_description,
         search_tags: form.search_tags, refund_available: form.refund_available,
+        return_eligible: form.return_eligible, exchange_available: form.exchange_available,
+        replacement_only: form.replacement_only, return_shipping_applicable: form.return_shipping_applicable,
+        seller_approval_required: form.seller_approval_required, return_window: form.return_window,
+        return_instructions: form.return_instructions,
         shipping_weight: form.shipping_weight,
       };
 
@@ -432,10 +446,38 @@ export function AdminProductFormPage() {
               <Field label="Return Policy"><Input value={form.return_policy} onChange={e => set('return_policy', e.target.value)} placeholder="e.g. 7 Days" /></Field>
               <Field label="Replacement Policy"><Input value={form.replacement_policy} onChange={e => set('replacement_policy', e.target.value)} placeholder="e.g. 7 Days" /></Field>
             </div>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.refund_available} onChange={e => set('refund_available', e.target.checked)} className="w-4 h-4 rounded" />
-              <span className="text-sm font-medium text-gray-700">Refund Available</span>
-            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              <label className="flex items-center gap-2 cursor-pointer p-3 border border-gray-200 rounded-xl hover:bg-gray-50">
+                <input type="checkbox" checked={form.return_eligible} onChange={e => set('return_eligible', e.target.checked)} className="w-4 h-4 rounded text-[#036e26]" />
+                <span className="text-sm font-medium text-gray-700">Return Eligible</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer p-3 border border-gray-200 rounded-xl hover:bg-gray-50">
+                <input type="checkbox" checked={form.exchange_available} onChange={e => set('exchange_available', e.target.checked)} className="w-4 h-4 rounded text-[#036e26]" />
+                <span className="text-sm font-medium text-gray-700">Exchange Available</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer p-3 border border-gray-200 rounded-xl hover:bg-gray-50">
+                <input type="checkbox" checked={form.replacement_only} onChange={e => set('replacement_only', e.target.checked)} className="w-4 h-4 rounded text-[#036e26]" />
+                <span className="text-sm font-medium text-gray-700">Replacement Only</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer p-3 border border-gray-200 rounded-xl hover:bg-gray-50">
+                <input type="checkbox" checked={form.return_shipping_applicable} onChange={e => set('return_shipping_applicable', e.target.checked)} className="w-4 h-4 rounded text-[#036e26]" />
+                <span className="text-sm font-medium text-gray-700">Return Shipping Fee</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer p-3 border border-gray-200 rounded-xl hover:bg-gray-50">
+                <input type="checkbox" checked={form.seller_approval_required} onChange={e => set('seller_approval_required', e.target.checked)} className="w-4 h-4 rounded text-[#036e26]" />
+                <span className="text-sm font-medium text-gray-700">Approval Required</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer p-3 border border-gray-200 rounded-xl hover:bg-gray-50">
+                <input type="checkbox" checked={form.refund_available} onChange={e => set('refund_available', e.target.checked)} className="w-4 h-4 rounded text-[#036e26]" />
+                <span className="text-sm font-medium text-gray-700">Refund Available</span>
+              </label>
+            </div>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Return Window (Days)"><Input type="number" min="0" value={form.return_window} onChange={e => set('return_window', e.target.value)} placeholder="e.g. 7" /></Field>
+            </div>
+            <div className="mt-4">
+              <Field label="Product-Specific Return Instructions"><Textarea rows={2} value={form.return_instructions} onChange={e => set('return_instructions', e.target.value)} placeholder="Any special instructions for returns/exchanges..." /></Field>
+            </div>
           </Section>
           <Section title="Documents">
             <Field label="User Manual">

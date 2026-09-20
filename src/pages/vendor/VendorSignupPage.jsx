@@ -14,6 +14,7 @@ export function VendorSignupPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [plans, setPlans] = useState([]);
   const [loadingPlans, setLoadingPlans] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -295,10 +296,23 @@ export function VendorSignupPage() {
                 )}
 
                 {selectedPlan && !paymentDone && (
-                  <button type="button" onClick={handlePayment} disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 bg-[#036e26] text-white py-3 rounded-xl font-semibold text-sm hover:bg-[#025a1f] transition-colors disabled:opacity-50">
-                    {loading ? 'Opening payment...' : `Pay ₹${selectedPlan.price} & Continue`}
-                  </button>
+                  <div className="space-y-4">
+                    <label className="flex items-start gap-3 p-4 bg-gray-50 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                      <input 
+                        type="checkbox" 
+                        checked={termsAccepted}
+                        onChange={(e) => setTermsAccepted(e.target.checked)}
+                        className="mt-1 w-5 h-5 rounded border-gray-300 text-[#fe6603] focus:ring-[#fe6603]" 
+                      />
+                      <span className="text-sm text-gray-700">
+                        I have read, understood and agree to comply with the <Link to="/vendor-guidelines" target="_blank" className="text-[#fe6603] font-semibold hover:underline">ULMGH-369 Vendor Terms & Conditions and Operational Guidelines</Link>.
+                      </span>
+                    </label>
+                    <button type="button" onClick={handlePayment} disabled={loading || !termsAccepted}
+                      className="w-full flex items-center justify-center gap-2 bg-[#036e26] text-white py-3 rounded-xl font-semibold text-sm hover:bg-[#025a1f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                      {loading ? 'Opening payment...' : `Pay ₹${selectedPlan.price} & Continue`}
+                    </button>
+                  </div>
                 )}
 
                 <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 mt-4">

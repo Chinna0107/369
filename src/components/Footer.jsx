@@ -83,7 +83,7 @@ export function Footer() {
           {/* Customer Service */}
           <div className="flex flex-col gap-4">
             <h3 className="text-lg font-bold text-white mb-2 relative inline-block">
-              Customer Service
+              Customer Help & Support
               <span className="absolute -bottom-1 left-0 w-8 h-1 bg-brand-orange rounded-full"></span>
             </h3>
             {[
@@ -91,13 +91,21 @@ export function Footer() {
               { name: 'About Us', path: '/about' },
               { name: 'Shipping Policy', path: '/shipping-policy' },
               { name: 'Replacements & Exchanges', path: '/returns-policy' },
-              { name: 'FAQs', path: '/faqs' },
-              { name: 'Vendor Guidelines', path: '/vendor-guidelines' }
+              { name: 'FAQ & Help', path: '/faqs' },
+              { name: 'Vendor Guidelines', path: '/vendor-guidelines' },
+              { name: 'How to Shop (Video)', path: 'https://youtube.com/', external: true }
             ].map(link => (
-              <Link key={link.name} to={link.path} className="group flex items-center text-[14px] text-gray-300 hover:text-brand-orange transition-colors w-fit">
-                <ChevronRight className="w-4 h-4 mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-orange" />
-                <span className="group-hover:translate-x-1 transition-transform">{link.name}</span>
-              </Link>
+              link.external ? (
+                <a key={link.name} href={link.path} target="_blank" rel="noopener noreferrer" className="group flex items-center text-[14px] text-gray-300 hover:text-brand-orange transition-colors w-fit">
+                  <ChevronRight className="w-4 h-4 mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-orange" />
+                  <span className="group-hover:translate-x-1 transition-transform">{link.name}</span>
+                </a>
+              ) : (
+                <Link key={link.name} to={link.path} className="group flex items-center text-[14px] text-gray-300 hover:text-brand-orange transition-colors w-fit">
+                  <ChevronRight className="w-4 h-4 mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-orange" />
+                  <span className="group-hover:translate-x-1 transition-transform">{link.name}</span>
+                </Link>
+              )
             ))}
           </div>
 
