@@ -99,7 +99,7 @@ export function ContactPage() {
                     <p className="text-sm text-gray-600 leading-relaxed">
                       D.No.70-126-G-3-6-1,<br/>
                       Near Beearappa Swamy Temple,<br/>
-                      Kallur, Kurnool – 018003<br/>
+                      Kallur, Kurnool – 518003<br/>
                       Andhra Pradesh - India
                     </p>
                   </div>

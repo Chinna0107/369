@@ -243,7 +243,7 @@ export function AboutPage() {
               <p>
                 D.No.70-126-G-3-6-1,<br />
                 Near Beearappa Swamy Temple,<br />
-                Kallur, Kurnool – 018003<br />
+                Kallur, Kurnool – 518003<br />
                 Andhra Pradesh - India
               </p>
               <p className="pt-4 border-t border-white/20">
