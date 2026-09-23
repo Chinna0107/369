@@ -433,12 +433,12 @@ export function HomePage() {
                          <img src={p.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={p.name} 
                               onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'; }}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                         
-                         {/* Add Button */}
-                         <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${p.id}`); }} className="absolute -bottom-4 right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-xl flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
-                           <svg className="w-5 h-5 text-[#db2777] group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"/></svg>
-                         </button>
                       </div>
+                         
+                      {/* Add Button */}
+                      <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${p.id}`); }} className="absolute top-[122px] md:top-[142px] right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-full flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
+                        <svg className="w-5 h-5 text-[#db2777] group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"/></svg>
+                      </button>
                       
                       <div className="p-3 pt-6 flex-1 flex flex-col bg-white">
                          <div className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md w-fit mb-1.5 border border-gray-200">1 Unit</div>
@@ -568,12 +568,12 @@ export function HomePage() {
                           
                           <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative flex items-center justify-center border-b border-gray-100 overflow-hidden">
                              <img src={product.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                             
-                             {/* Add Button */}
-                             <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${product.id}`); }} className="absolute -bottom-4 right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-xl flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
-                               <svg className="w-5 h-5 text-[#db2777] group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"/></svg>
-                             </button>
                           </div>
+                             
+                          {/* Add Button */}
+                          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${product.id}`); }} className="absolute top-[122px] md:top-[142px] right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-full flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
+                            <svg className="w-5 h-5 text-[#db2777] group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"/></svg>
+                          </button>
                           
                           <div className="p-3 pt-6 flex-1 flex flex-col bg-white">
                              <div className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md w-fit mb-1.5 border border-gray-200">1 Unit</div>
@@ -665,12 +665,12 @@ export function HomePage() {
                           
                           <div className="h-[140px] md:h-[160px] bg-[#f8fafc] relative flex items-center justify-center border-b border-gray-100 overflow-hidden">
                              <img src={product.image_url || 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&q=80'} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                             
-                             {/* Add Button */}
-                             <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${product.id}`); }} className="absolute -bottom-4 right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-xl flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
-                               <svg className="w-5 h-5 text-[#db2777] group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"/></svg>
-                             </button>
                           </div>
+                             
+                          {/* Add Button */}
+                          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/product/${product.id}`); }} className="absolute top-[122px] md:top-[142px] right-3 w-9 h-9 bg-white border-2 border-[#db2777] rounded-full flex items-center justify-center shadow-md hover:bg-[#db2777] group/btn transition-colors z-20">
+                            <svg className="w-5 h-5 text-[#db2777] group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"/></svg>
+                          </button>
                           
                           <div className="p-3 pt-6 flex-1 flex flex-col bg-white">
                              <div className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md w-fit mb-1.5 border border-gray-200">1 Unit</div>
@@ -704,7 +704,7 @@ export function HomePage() {
           <GroupedCategories />
 
           {/* Beautiful Collections */}
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <div className="flex items-center gap-2 mb-4">
               <svg className="w-5 h-5 text-[#E57E25]" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
@@ -713,7 +713,7 @@ export function HomePage() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {/* Collection 1 */}
+             
               <Link to="/collection/wedding" className="relative group overflow-hidden rounded-[2rem] aspect-[3/4] bg-gray-100 block">
                 <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80" alt="Wedding Collection" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 md:p-6">
@@ -724,7 +724,7 @@ export function HomePage() {
                 </div>
               </Link>
 
-              {/* Collection 2 */}
+             
               <Link to="/collection/festival" className="relative group overflow-hidden rounded-[2rem] aspect-[3/4] bg-gray-100 block">
                 <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&q=80" alt="Festival Collection" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 md:p-6">
@@ -735,7 +735,7 @@ export function HomePage() {
                 </div>
               </Link>
 
-              {/* Collection 3 */}
+             
               <Link to="/collection/office" className="relative group overflow-hidden rounded-[2rem] aspect-[3/4] bg-gray-100 block">
                 <img src="https://images.unsplash.com/photo-1583391733958-d25e07fac04f?w=800&q=80" alt="Office Wear" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 md:p-6">
@@ -746,7 +746,7 @@ export function HomePage() {
                 </div>
               </Link>
 
-              {/* Collection 4 */}
+              
               <Link to="/collection/casual" className="relative group overflow-hidden rounded-[2rem] aspect-[3/4] bg-gray-100 block">
                 <img src="https://images.unsplash.com/photo-1606902965551-dce093cda6e7?w=800&q=80" alt="Casual Wear" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 md:p-6">
@@ -757,7 +757,7 @@ export function HomePage() {
                 </div>
               </Link>
             </div>
-          </div>
+          </div> */}
 
           {/* Recommended for You */}
           {products.length > 6 && (
