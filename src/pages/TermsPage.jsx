@@ -58,6 +58,13 @@ export function TermsPage() {
             <h2 className="text-2xl font-bold text-[#022A21] mb-4 font-serif">5. Changes to the Terms</h2>
             <p>ULMGH369 may make changes to the Universal Terms or Additional Terms from time to time. When these changes are made, we will make a new copy of the Universal Terms available and any new Additional Terms will be made available to you from within, or through, the affected services.</p>
           </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-[#022A21] mb-4 font-serif">6. Governing Law & Jurisdiction</h2>
+            <p className="mb-3">These Terms and Conditions shall be governed by and construed in accordance with the laws of India.</p>
+            <p className="mb-3">Subject to applicable laws and statutory rights available to consumers, any dispute arising out of or relating to the operation of the ULMGH-369 platform, its services, vendor relationships, business operations, or these Terms shall be subject to the jurisdiction of the competent courts at Kurnool, Andhra Pradesh, India, to the extent legally permissible.</p>
+            <p>Nothing in this clause shall restrict or exclude any statutory right of a consumer to approach a competent Consumer Commission, court, authority, or other forum having jurisdiction under applicable Indian law.</p>
+          </section>
           
         </div>
       </div>

@@ -14,7 +14,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-[#033429] p-8 md:p-10 rounded-3xl border border-[#065A46] shadow-xl">
           <div className="max-w-xl text-center md:text-left">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: 'Georgia, serif' }}>Join the ULMGH-369 Community</h3>
-            <p className="text-gray-300 text-sm md:text-base">Subscribe to receive exclusive offers, new product updates, special opportunities, and inspiring stories from businesses across our growing marketplace.</p>
+            <p className="text-gray-300 text-sm md:text-base">Subscribe to receive exclusive offers, new product updates, special opportunities, and inspiring stories from local businesses and creators across our growing marketplace.</p>
           </div>
           <div className="w-full md:w-auto flex-1 max-w-md flex items-center gap-2 relative">
             <input 

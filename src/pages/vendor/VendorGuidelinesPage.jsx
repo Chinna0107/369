@@ -17,8 +17,11 @@ export function VendorGuidelinesPage() {
           <h1 className="text-3xl md:text-5xl font-extrabold text-[#022A21] mb-4 font-serif">
             Vendor Registration & Operational Guidelines
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            The purpose of these guidelines is to ensure that every vendor understands their responsibilities regarding stock accuracy, product quality, timely dispatch, correct order fulfilment, packaging, customer service and responsible business practices from the time of registration.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
+            The purpose of these guidelines is to ensure that every vendor understands and complies with their responsibilities regarding stock accuracy, product quality, accurate product information, timely order processing and dispatch, correct order fulfilment, appropriate packaging, customer service, returns and exchanges, and responsible business practices from the time of registration and throughout their association with ULMGH-369.
+          </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            These guidelines are intended to maintain customer trust, product quality, operational efficiency, transparency, and a consistent shopping experience across the ULMGH-369 Website, Android Application, and iOS Application.
           </p>
         </div>
 
@@ -30,7 +33,7 @@ export function VendorGuidelinesPage() {
               Stock Accuracy & Availability
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors must fulfil orders using the exact stock and product specifications displayed on the platform. If a product becomes unavailable, the vendor must immediately update it as “Out of Stock.”
+              Vendors must fulfil orders using the exact stock quantity, product specifications, and availability status displayed on the platform. If a product becomes unavailable or the displayed stock is exhausted, the vendor must immediately update the product status as “Out of Stock” on the ULMGH-369 platform.
             </p>
           </section>
 
@@ -40,7 +43,7 @@ export function VendorGuidelinesPage() {
               Quality Assurance
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors must maintain the quality represented on the platform and inspect products before dispatch to ensure they are free from defects or damage.
+              Vendors must maintain the quality, condition, and specifications represented on the platform and must inspect products before dispatch to ensure that they are free from defects, damage, or any significant quality issues. Vendors must not dispatch products that are defective, damaged, expired, or materially different from the product information displayed on the platform.
             </p>
           </section>
 
@@ -50,7 +53,7 @@ export function VendorGuidelinesPage() {
               Timely Order Processing & Dispatch
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors should verify and process every order promptly and hand it over to the designated delivery/logistics partner within the agreed SLA timeframe.
+              Vendors must verify and process every order promptly and prepare the order for dispatch within the agreed SLA timeframe. The order must be properly packed and handed over to the designated delivery or logistics partner within the applicable SLA timeframe.
             </p>
           </section>
 
@@ -60,7 +63,7 @@ export function VendorGuidelinesPage() {
               Correct Product Shipment
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              The product, size, colour, quantity, variant and specifications supplied must match the customer's order.
+              Vendors must ensure that the product, size, colour, quantity, variant, model, and specifications supplied exactly match the customer's order and the product details displayed on the ULMGH-369 platform. Vendors must carefully verify the order details before dispatch to prevent wrong, incomplete, or mismatched shipments.
             </p>
           </section>
 
@@ -70,7 +73,7 @@ export function VendorGuidelinesPage() {
               Secure & Professional Packaging
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Products must be packed properly using suitable protective materials to minimize damage during transportation.
+              Vendors must pack products securely, neatly, and appropriately using suitable packaging and protective materials to minimize the risk of damage, leakage, breakage, contamination, or deterioration during handling and transportation. Packaging must be appropriate to the nature, size, weight, and fragility of the product.
             </p>
           </section>
 
@@ -80,7 +83,7 @@ export function VendorGuidelinesPage() {
               Accurate Product Information
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Product name, description, images, dimensions, weight, colour, material, specifications, variants and other relevant information must accurately represent the actual product.
+              Vendors must ensure that the product name, description, images, dimensions, weight, colour, material, specifications, variants, and other relevant information displayed on the ULMGH-369 platform accurately represent the actual product offered for sale. All product information must be clear, complete, current, and not misleading. Any changes to the product or its specifications must be updated promptly on the platform.
             </p>
           </section>
 
@@ -90,7 +93,7 @@ export function VendorGuidelinesPage() {
               Genuine & Legally Permitted Products
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors must list and sell genuine and legally permitted products. Counterfeit, duplicate or unauthorized products should not be permitted.
+              Vendors must list and sell only genuine, authentic, and legally permitted products that comply with applicable laws, regulations, standards, and platform requirements. Vendors must not list or sell counterfeit, duplicate, unauthorized, stolen, prohibited, or otherwise unlawful products on the ULMGH-369 platform. Vendors are responsible for ensuring the authenticity and lawful sale of the products they offer.
             </p>
           </section>
 
@@ -100,7 +103,7 @@ export function VendorGuidelinesPage() {
               Returns & Replacements
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors must cooperate with the applicable ULMGH-369 return, replacement and refund policies, particularly in cases of damaged, incorrect or quality-mismatched products.
+              Vendors must cooperate fully with the applicable ULMGH-369 Return, Replacement, Exchange, and Refund Policies and must promptly respond to return or replacement requests, particularly in cases involving damaged, defective, incorrect, incomplete, or materially different products. Vendors must provide the necessary information and assistance to facilitate timely resolution of such cases.
             </p>
           </section>
 
@@ -110,7 +113,7 @@ export function VendorGuidelinesPage() {
               Communication & Responsiveness
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors should respond promptly and professionally to customer queries, ULMGH-369 support requests and administrative communications.
+              Vendors must respond promptly, professionally, and courteously to customer queries, ULMGH-369 customer support requests, order-related communications, and administrative communications. Vendors must provide accurate and necessary information and cooperate with ULMGH-369 support and administration teams to ensure timely resolution of customer and operational issues.
             </p>
           </section>
 
@@ -120,7 +123,7 @@ export function VendorGuidelinesPage() {
               Customer Data Privacy
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Customer information obtained through ULMGH-369 must be used only for legitimate order fulfilment and related customer service and must not be misused.
+              Vendors must protect all customer information received through ULMGH-369 and use it only for legitimate order fulfilment, delivery coordination, returns, replacements, and related customer service purposes. Vendors must not misuse, copy, retain unnecessarily, disclose, sell, share, or use customer information for any unauthorized personal or commercial purpose. Vendors must maintain the confidentiality and security of customer information and comply with applicable data protection and privacy requirements.
             </p>
           </section>
 
@@ -130,7 +133,7 @@ export function VendorGuidelinesPage() {
               Fair & Transparent Business Practices
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors must provide truthful product information and transparent pricing and must not engage in misleading or deceptive practices.
+              Vendors must provide truthful, accurate, and complete product information and maintain transparent and fair pricing on the ULMGH-369 platform. Vendors must not engage in misleading, deceptive, fraudulent, or unfair business practices, including false product claims, misleading offers, hidden charges, or inaccurate pricing or discounts.
             </p>
           </section>
 
@@ -140,7 +143,7 @@ export function VendorGuidelinesPage() {
               Legal & Regulatory Compliance
             </h3>
             <p className="text-gray-600 leading-relaxed ml-11">
-              Vendors are responsible for complying with applicable laws, tax requirements, licences and other regulatory requirements relating to their products and business.
+              Vendors are responsible for complying with all applicable laws, rules, regulations, tax requirements, licences, registrations, permits, certifications, and other regulatory requirements relating to their products and business activities. Vendors must obtain and maintain all legally required approvals and provide valid documentation when requested by ULMGH-369 or the relevant authorities.
             </p>
           </section>
 
